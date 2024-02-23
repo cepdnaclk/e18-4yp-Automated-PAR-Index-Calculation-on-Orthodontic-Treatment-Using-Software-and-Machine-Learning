@@ -34,5 +34,12 @@
             "email": "roshanr@eng.pdn.ac.lk"
         }
     ],
+    "media": [
+        {
+            "type": "youtube",
+            "title": "",
+            "url": "#"
+        }
+    ],
     "tags": ["Final Year Projects"]
 }
