@@ -7,7 +7,6 @@ repository-name: eYY-4yp-project-template
 title:
 ---
 
-[comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
 # Project Title
 
@@ -38,6 +37,10 @@ title:
 Orthodontic treatment is essential for correcting misaligned and uneven teeth while contributing significantly to oral health and aesthetics. Traditional methods for evaluating orthodontic treatment success rely heavily on the manual examination of pre and post-treatment dental models, using indices like the Peer Assessment Rating (PAR) index. However, these methods suffer from subjectivity and variability, particularly among less experienced practitioners. This review of the literature looks into the creation and use of software tools intended to automate the evaluation of orthodontic treatment results using 3D models of orthodontic studies. Comparing manual and software-based evaluations highlights the potential of digital technologies to offer more objective, efficient, and accessible assessment methods. It explores the PAR index's role in treatment evaluation, the advantages of 3D visualization and analysis in orthodontics, existing digital tools in the field, and the statistical methods, use of machine learning in orthodontics and algorithms that underpin software evaluations. This exploration aims to demonstrate the benefits of software tools in enhancing treatment evaluation accuracy, improving learning for early-career orthodontists, and making standardized assessment methods more accessible to all practitioners.
 
 ## Related works
+**PAR Index:** A key tool for evaluating orthodontic treatment outcomes, measuring deviations from ideal alignment and occlusion. Studies have validated its reliability and importance in orthodontic assessments, advocating for weighted scores to better reflect treatment improvements.
+**3D Visualization and Analysis:** Advances in digital technology enable precise 3D modeling of dental structures, improving diagnosis, treatment planning, and outcome evaluation. Various studies emphasize the accuracy and reliability of 3D scans and the benefits of CAD software in orthodontics.
+**Machine Learning in Orthodontics:** Machine learning applications are revolutionizing orthodontic diagnostics, treatment planning, and outcome evaluation by automating landmark identification, skeletal classification, and malocclusion diagnosis, among others. However, challenges such as data quality and model overfitting are noted.
+**Software Tools Development:** The creation of digital tools like the Ortho Analyzer software and Dental Monitoring System demonstrates significant improvements in patient care, offering efficient, accurate, and patient-friendly orthodontic treatment evaluations. These tools leverage digital models and AI for better orthodontic practice management and treatment monitoring.
 
 ## Methodology
 
@@ -46,8 +49,6 @@ Orthodontic treatment is essential for correcting misaligned and uneven teeth wh
 ## Results and Analysis
 
 ## Publications
-[//]: # "Note: Uncomment each once you uploaded the files to the repository"
-
 1. [Semester 7 report](./)
 2. [Semester 7 slides](./)
 <!-- 3. [Semester 8 report](./) -->
@@ -56,13 +57,7 @@ Orthodontic treatment is essential for correcting misaligned and uneven teeth wh
 
 
 ## Links
-
-[//]: # ( NOTE: EDIT THIS LINKS WITH YOUR REPO DETAILS )
-
-- [Project Repository](https://github.com/cepdnaclk/repository-name)
-- [Project Page](https://cepdnaclk.github.io/repository-name)
+- [Project Repository](https://github.com/cepdnaclk/e18-4yp-Gamification-of-Orthodontic-Treatment-Success-with-Pre-and-Post-Dental-Models)
+- [Project Page](https://cepdnaclk.github.io/e18-4yp-Gamification-of-Orthodontic-Treatment-Success-with-Pre-and-Post-Dental-Models/)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
-
-[//]: # "Please refer this to learn more about Markdown syntax"
-[//]: # "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
