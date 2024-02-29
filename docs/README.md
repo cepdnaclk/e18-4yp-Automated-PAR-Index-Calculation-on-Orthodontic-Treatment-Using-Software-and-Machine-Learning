@@ -3,10 +3,9 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and title
-repository-name: eYY-4yp-project-template
-title:
+repository-name: e18-4yp-Gamification-of-Orthodontic-Treatment-Success-with-Pre-and-Post-Dental-Models
+title: Gamification of Orthodontic Treatment Success with Pre and Post Dental Models
 ---
-
 
 # Project Title
 
