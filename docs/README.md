@@ -37,8 +37,10 @@ Orthodontic treatment is essential for correcting misaligned and uneven teeth wh
 
 ## Related works
 **PAR Index:** A key tool for evaluating orthodontic treatment outcomes, measuring deviations from ideal alignment and occlusion. Studies have validated its reliability and importance in orthodontic assessments, advocating for weighted scores to better reflect treatment improvements.
+
 **3D Visualization and Analysis:** Advances in digital technology enable precise 3D modeling of dental structures, improving diagnosis, treatment planning, and outcome evaluation. Various studies emphasize the accuracy and reliability of 3D scans and the benefits of CAD software in orthodontics.
 **Machine Learning in Orthodontics:** Machine learning applications are revolutionizing orthodontic diagnostics, treatment planning, and outcome evaluation by automating landmark identification, skeletal classification, and malocclusion diagnosis, among others. However, challenges such as data quality and model overfitting are noted.
+
 **Software Tools Development:** The creation of digital tools like the Ortho Analyzer software and Dental Monitoring System demonstrates significant improvements in patient care, offering efficient, accurate, and patient-friendly orthodontic treatment evaluations. These tools leverage digital models and AI for better orthodontic practice management and treatment monitoring.
 
 ## Methodology
