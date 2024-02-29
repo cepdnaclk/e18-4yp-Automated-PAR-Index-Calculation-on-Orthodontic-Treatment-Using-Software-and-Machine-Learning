@@ -13,14 +13,14 @@ title:
 
 #### Team
 
-- eNumber, Name, [email](mailto:name@email.com)
-- eNumber, Name, [email](mailto:name@email.com)
-- eNumber, Name, [email](mailto:name@email.com)
+- E/18/154, Chamudi Jayasumana, [email](mailto:e18154@eng.pdn.ac.lk)
+- E/18/349, Anushanga Pavith, [email](mailto:e18349@eng.pdn.ac.lk)
+- E/18/327, Chamara Dilshan, [email](mailto:e18327@eng.pdn.ac.lk)
 
 #### Supervisors
 
-- Name, [email](mailto:name@eng.pdn.ac.lk)
-- Name, [email](mailto:name@eng.pdn.ac.lk)
+- Dr. Asitha Bandaranayake, [email](mailto:asithab@eng.pdn.ac.lk)
+- Dr Kumari Ratnatilake, [email](mailto:ksandamala2002@dental.pdn.ac.lk)
 
 #### Table of content
 
