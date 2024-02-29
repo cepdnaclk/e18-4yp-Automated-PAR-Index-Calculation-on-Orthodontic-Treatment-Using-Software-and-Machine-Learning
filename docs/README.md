@@ -29,20 +29,13 @@ title:
 3. [Methodology](#methodology)
 4. [Experiment Setup and Implementation](#experiment-setup-and-implementation)
 5. [Results and Analysis](#results-and-analysis)
-6. [Conclusion](#conclusion)
-7. [Publications](#publications)
-8. [Links](#links)
+6. [Publications](#publications)
+7. [Links](#links)
 
 ---
 
-<!-- 
-DELETE THIS SAMPLE before publishing to GitHub Pages !!!
-This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/)
-![Sample Image](./images/sample.png) 
--->
-
-
 ## Abstract
+Orthodontic treatment is essential for correcting misaligned and uneven teeth while contributing significantly to oral health and aesthetics. Traditional methods for evaluating orthodontic treatment success rely heavily on the manual examination of pre and post-treatment dental models, using indices like the Peer Assessment Rating (PAR) index. However, these methods suffer from subjectivity and variability, particularly among less experienced practitioners. This review of the literature looks into the creation and use of software tools intended to automate the evaluation of orthodontic treatment results using 3D models of orthodontic studies. Comparing manual and software-based evaluations highlights the potential of digital technologies to offer more objective, efficient, and accessible assessment methods. It explores the PAR index's role in treatment evaluation, the advantages of 3D visualization and analysis in orthodontics, existing digital tools in the field, and the statistical methods, use of machine learning in orthodontics and algorithms that underpin software evaluations. This exploration aims to demonstrate the benefits of software tools in enhancing treatment evaluation accuracy, improving learning for early-career orthodontists, and making standardized assessment methods more accessible to all practitioners.
 
 ## Related works
 
@@ -52,13 +45,11 @@ This is a sample image, to show how to add images to your page. To learn more op
 
 ## Results and Analysis
 
-## Conclusion
-
 ## Publications
 [//]: # "Note: Uncomment each once you uploaded the files to the repository"
 
-<!-- 1. [Semester 7 report](./) -->
-<!-- 2. [Semester 7 slides](./) -->
+1. [Semester 7 report](./)
+2. [Semester 7 slides](./)
 <!-- 3. [Semester 8 report](./) -->
 <!-- 4. [Semester 8 slides](./) -->
 <!-- 5. Author 1, Author 2 and Author 3 "Research paper title" (2021). [PDF](./). -->
