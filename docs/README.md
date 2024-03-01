@@ -7,7 +7,7 @@ repository-name: e18-4yp-Gamification-of-Orthodontic-Treatment-Success-with-Pre-
 title: Gamification of Orthodontic Treatment Success with Pre and Post-Dental Models
 ---
 
-# Project Title
+# Gamification of Orthodontic Treatment Success with Pre and Post-Dental Models
 
 #### Team
 
