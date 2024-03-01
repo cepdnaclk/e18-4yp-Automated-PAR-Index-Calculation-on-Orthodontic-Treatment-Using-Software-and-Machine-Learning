@@ -101,7 +101,7 @@ The finalized software was deployed on a web-based platform, allowing users to a
 
 ## Publications
 1. [Semester 7 report](https://docs.google.com/document/d/16jnZlhk0vevTFfMshj0TkNXyewa5vGLhrcHlM-IsdBY/edit?usp=sharing)
-2. [Semester 7 slides](https://docs.google.com/presentation/d/1vz0wW-GlwQxTWEFvoMyyUm7zuoV5Qpjl5DdTDVKUv8Y/edit?usp=sharing)
+2. [Semester 7 slides](https://docs.google.com/presentation/d/15Y7DYUnLUMbanED_qUqEZDwQIxZtWAux/edit?usp=sharing&ouid=108090300417007817254&rtpof=true&sd=true)
 <!-- 3. [Semester 8 report](./) -->
 <!-- 4. [Semester 8 slides](./) -->
 <!-- 5. Author 1, Author 2 and Author 3 "Research paper title" (2021). [PDF](./). -->
