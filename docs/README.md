@@ -81,6 +81,23 @@ Feedback from the testing phase led to iterative improvements in the deep learni
 The finalized software was deployed on a web-based platform, allowing users to access the tool remotely. The platform features a user-friendly interface for uploading STL files, initiating the auto-marking process, and obtaining the PAR index results.
 
 **UI/UX designs**
+<p align="center">
+  <img src="images/Login.png" alt="login" style="width:300px;">
+  &nbsp;
+  <img src="images/Dashboard.png" alt="dashboard" style="width:300px;">
+  &nbsp;
+  <img src="images/Get measurements.png" alt="get measurements" style="width:300px;">
+  &nbsp;
+  <img src="images/Update patient data.png" alt="patient data" style="width:300px;">
+  &nbsp;
+  <img src="images/History.png" alt="get measurements" style="width:300px;">
+  &nbsp;
+  <img src="images/History-1.png" alt="get measurements" style="width:300px;">
+  &nbsp;
+  <img src="images/Patient profile.png" alt="get measurements" style="width:300px;">
+  &nbsp;
+</p>
+
 
 ## Results and Analysis
 
