@@ -92,8 +92,6 @@ The finalized software was deployed on a web-based platform, allowing users to a
   &nbsp;
   <img src="images/History.png" alt="get measurements" style="width:300px;">
   &nbsp;
-  <img src="images/History-1.png" alt="get measurements" style="width:300px;">
-  &nbsp;
   <img src="images/Patient profile.png" alt="get measurements" style="width:300px;">
   &nbsp;
 </p>
