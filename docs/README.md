@@ -4,7 +4,7 @@ permalink: index.html
 
 # Please update this with your repository name and title
 repository-name: e18-4yp-Gamification-of-Orthodontic-Treatment-Success-with-Pre-and-Post-Dental-Models
-title: Gamification of Orthodontic Treatment Success with Pre and Post Dental Models
+title: Gamification of Orthodontic Treatment Success with Pre and Post-Dental Models
 ---
 
 # Project Title
@@ -45,14 +45,17 @@ Orthodontic treatment is essential for correcting misaligned and uneven teeth wh
 **Software Tools Development:** The creation of digital tools like the Ortho Analyzer software and Dental Monitoring System demonstrates significant improvements in patient care, offering efficient, accurate, and patient-friendly orthodontic treatment evaluations. These tools leverage digital models and AI for better orthodontic practice management and treatment monitoring.
 
 ## Methodology
+**System Data Flow**
+
+![Data Flow](images/DataFlow.png)
 
 ## Experiment Setup and Implementation
 
 ## Results and Analysis
 
 ## Publications
-1. [Semester 7 report](./)
-2. [Semester 7 slides](./)
+1. [Semester 7 report](https://docs.google.com/document/d/16jnZlhk0vevTFfMshj0TkNXyewa5vGLhrcHlM-IsdBY/edit?usp=sharing)
+2. [Semester 7 slides](https://docs.google.com/presentation/d/1vz0wW-GlwQxTWEFvoMyyUm7zuoV5Qpjl5DdTDVKUv8Y/edit?usp=sharing)
 <!-- 3. [Semester 8 report](./) -->
 <!-- 4. [Semester 8 slides](./) -->
 <!-- 5. Author 1, Author 2 and Author 3 "Research paper title" (2021). [PDF](./). -->
