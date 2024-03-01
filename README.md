@@ -45,7 +45,7 @@ Orthodontic treatment is essential for correcting misaligned and uneven teeth wh
 ## Results and Analysis
 
 ## Publications
-1. [Semester 7 report](https://docs.google.com/document/d/16jnZlhk0vevTFfMshj0TkNXyewa5vGLhrcHlM-IsdBY/edit?usp=sharing)
+1. [Semester 7 report](https://drive.google.com/file/d/1FpbkwDpmasbGhE4ptrSlNjr5bBsTiQNu/view?usp=sharing)
 2. [Semester 7 slides](https://docs.google.com/presentation/d/1vz0wW-GlwQxTWEFvoMyyUm7zuoV5Qpjl5DdTDVKUv8Y/edit?usp=sharing)
 <!-- 3. [Semester 8 report](./) -->
 <!-- 4. [Semester 8 slides](./) -->
