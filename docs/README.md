@@ -50,6 +50,37 @@ Orthodontic treatment is essential for correcting misaligned and uneven teeth wh
 ![Data Flow](images/DataFlow.png)
 
 ## Experiment Setup and Implementation
+**Objective**
+The goal of this phase was to develop and implement a software solution that enables dentists and orthodontists to upload Stereolithography (STL) files, from which our software can extract measurements and automatically calculate the Peer Assessment Rating (PAR) index.
+
+**Development**
+The software was developed in stages, starting with the ability to render STL files. This functionality allowed users to visually analyze and mark anatomical points on the 3D model for measurement purposes. The marked data were then stored in a dedicated database for subsequent analysis.
+
+**Data Collection**
+An interface was created for users, primarily consisting of dental professionals and trainees, to interact with the STL files. As they marked the necessary points on the 3D models, these data points served as labelled data for training our deep neural network.
+
+**Machine Learning Implementation**
+A deep learning framework was chosen to develop a neural network capable of learning from the labeled dataset. The network was designed to:
+
+1. Learn the patterns of point marking from the dataset.
+2. Automate the marking process on new STL files without human intervention.
+3. Calculate the PAR index based on the identified points.
+
+**Verification Process**
+The system includes a verification process where the automatically marked points and calculated PAR index are reviewed. This verification can be performed by:
+1. Comparing the software’s output with manual markings and calculations.
+2. Assessing the consistency and accuracy of the software across a variety of cases with known PAR indices.
+
+**Testing and Validation**
+The software underwent rigorous testing by having it process a diverse set of STL files marked by experienced orthodontic practitioners. The accuracy of the software's auto-marking and PAR calculation was then compared against the expert's markings.
+
+**Iteration and Optimization**
+Feedback from the testing phase led to iterative improvements in the deep learning model, refining its accuracy and reliability. The final implementation showed a high degree of concordance with expert assessments, confirming the model's efficacy.
+
+**Implementation**
+The finalized software was deployed on a web-based platform, allowing users to access the tool remotely. The platform features a user-friendly interface for uploading STL files, initiating the auto-marking process, and obtaining the PAR index results.
+
+**UI/UX designs**
 
 ## Results and Analysis
 
