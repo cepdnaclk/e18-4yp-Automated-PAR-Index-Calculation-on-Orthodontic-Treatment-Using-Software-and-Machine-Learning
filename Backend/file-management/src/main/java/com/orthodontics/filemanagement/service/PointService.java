@@ -24,7 +24,6 @@ public class PointService {
                 .coordinates(pointRequest.getCoordinates())
                 .build();
 
-
         pointRepository.save(point);
         log.info("Point created: {}", point);
     }
