@@ -1,8 +1,9 @@
 import sys
+import base64
 import numpy as np
 import json
 import requests
-from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QFileDialog, QMessageBox, QComboBox
 from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 from vtk.util.numpy_support import vtk_to_numpy
 import vtk
@@ -16,11 +17,20 @@ class MainWindow(QMainWindow):
         # Main layout and widget setup
         self.mainWidget = QWidget()
         self.setCentralWidget(self.mainWidget)
-        self.mainLayout = QHBoxLayout()
+        self.mainLayout = QVBoxLayout()
         self.mainWidget.setLayout(self.mainLayout)
 
-        # Left side panel with buttons
-        self.buttonPanel = QVBoxLayout()
+        self.comboPanel = QHBoxLayout()
+        self.mainLayout.addLayout(self.comboPanel)
+
+        # File type dropdown setup
+        self.fileTypeCombo = QComboBox()
+        self.fileTypeCombo.addItems(["Buccal", "Upper anterior", "Lower anterior"])  
+        self.fileTypeCombo.setStyleSheet("background-color: #2196F3; color: white; border-radius: 10px; padding: 5px;")
+        self.comboPanel.addWidget(self.fileTypeCombo)
+
+        # Panel with buttons
+        self.buttonPanel = QHBoxLayout()
         self.mainLayout.addLayout(self.buttonPanel)
 
         # Set button panel background color to black
@@ -82,6 +92,10 @@ class MainWindow(QMainWindow):
     def load_stl(self):
         file_path = QFileDialog.getOpenFileName(self, "Select STL file", "", "STL Files (*.stl)")[0]
         if file_path:
+            with open(file_path, "rb") as file:
+                # Encode the file content in base64
+                self.files_data = base64.b64encode(file.read()).decode('utf-8')
+            
             reader = vtk.vtkSTLReader()
             reader.SetFileName(file_path)
             reader.Update()
@@ -159,6 +173,9 @@ class MainWindow(QMainWindow):
             self.interactor.SetInteractorStyle(style)
             self.interactor.Initialize()
             self.vtkWidget.GetRenderWindow().Render()
+        
+        # Save STL file in backend
+        self.stl_id = self.save_file()
 
     def save_to_json(self):
         if not self.points:
@@ -200,12 +217,31 @@ class MainWindow(QMainWindow):
                 self.renderer.RemoveActor(marker['textActor'])
         self.vtkWidget.GetRenderWindow().Render()
         print("All markers have been reset.")
+    
+    def save_file(self):
+        try:
+            url = 'http://localhost:8080/api/stlfile'
+            data = {
+                "file_type": self.fileTypeCombo.currentText(),
+                "file": self.files_data       
+            }
+            
+            # Send POST request with JSON data
+            response = requests.post(url, json=data)
+
+            if response.status_code == 201:
+                return response.json.get('stl_id')        
+            else:
+                QMessageBox.warning(self, "Error", "Failed to save file.")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", "An error occurred when saving the file: " + str(e))
 
     def save_data(self):
         try:
             url = 'http://localhost:8080/api/point/list'
             data = {
-                "stl_id": 41,
+                "stl_id": self.stl_id,
                 "points": [
                     {
                         "point_name": point["name"],
