@@ -17,6 +17,17 @@ class MainWindow(QMainWindow):
         self.mainWidget.setStyleSheet("background-color: black;")
 
         self.btn_load = QPushButton("Load STL")
+
+        self.fileTypeComboBox = QComboBox()
+        self.fileTypeComboBox.addItems(
+            ["Upper Anterior Segment", 
+             "Lower Anterior Segment", 
+             "Buccal Segment"
+            ])
+        self.fileType = "Upper Anterior Segment"  # Default value
+
+        self.fileTypeComboBox.currentIndexChanged.connect(self.update_file_type)
+
         self.measurementTypeComboBox = QComboBox()
         self.measurementTypeComboBox.addItems(
             ["Upper Anterior Segment Alignment", 
@@ -71,7 +82,7 @@ class MainWindow(QMainWindow):
         }
         """
 
-        for btn in [self.btn_load, self.measurementTypeComboBox, self.btn_save_json, self.btn_reset, self.btn_undo, self.btnSave]:
+        for btn in [self.btn_load, self.fileTypeComboBox,self.measurementTypeComboBox, self.btn_save_json, self.btn_reset, self.btn_undo, self.btnSave]:
             btn.setStyleSheet(button_style)
             self.buttonPanel.addWidget(btn)
 
@@ -92,6 +103,11 @@ class MainWindow(QMainWindow):
         # This method is called whenever the selected index in the combo box changes.
         self.measurement = self.measurementTypeComboBox.currentText()
         print("Selected Measurement Type:", self.measurement)
+    
+    def update_file_type(self, index):
+        # This method is called whenever the selected index in the combo box changes.
+        self.fileType = self.measurementTypeComboBox1.currentText()
+        print("Selected File Type:", self.fileType)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

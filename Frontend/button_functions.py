@@ -1,4 +1,5 @@
 import json
+import base64
 import numpy as np
 import requests
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
@@ -10,6 +11,10 @@ from commonHelper import RenderHelper  # Ensure this is properly imported
 def load_stl(self):
     file_path = QFileDialog.getOpenFileName(self, "Select STL file", "", "STL Files (*.stl)")[0]
     if file_path:
+        with open(file_path, "rb") as file:
+                # Encode the file content in base64
+                self.files_data = base64.b64encode(file.read()).decode('utf-8')
+
         reader = vtk.vtkSTLReader()
         reader.SetFileName(file_path)
         reader.Update()
@@ -105,10 +110,12 @@ def save_data(self):
     try:
         url = 'http://localhost:8080/api/point/list'
         data = {
+            "stl_file" : self.files_data,
+            "file_type" : self.fileType,
             "measurement_type": self.measurement,
-            "stl_id": 41,
             "points": [{"point_name": point["name"], "coordinates": f"{point['x']},{point['y']},{point['z']}"} for point in self.points]
         }
+    
         response = requests.post(url, json=data)
         if response.status_code == 201:
             QMessageBox.information(self, "Success", "The data was saved successfully!")
