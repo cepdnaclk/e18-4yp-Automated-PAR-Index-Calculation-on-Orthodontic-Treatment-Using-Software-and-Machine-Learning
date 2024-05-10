@@ -1,5 +1,4 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QComboBox
 from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 import vtk
 from button_functions import load_stl, save_to_json, undo_marker, reset_markers, save_data
@@ -9,10 +8,9 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(parent)
         self.mainWidget = QWidget()
         self.setCentralWidget(self.mainWidget)
-        self.mainLayout = QHBoxLayout()
+        self.mainLayout = QVBoxLayout()
         self.mainWidget.setLayout(self.mainLayout)
 
-        self.buttonPanel = QVBoxLayout()
         self.mainLayout.addLayout(self.buttonPanel)
         self.mainWidget.setStyleSheet("background-color: black;")
 
@@ -87,11 +85,6 @@ class MainWindow(QMainWindow):
         self.vtkWidget.GetRenderWindow().AddRenderer(self.renderer)
         self.markers = []
         self.points = []
-
-    def update_measurement_type(self, index):
-        # This method is called whenever the selected index in the combo box changes.
-        self.measurement = self.measurementTypeComboBox.currentText()
-        print("Selected Measurement Type:", self.measurement)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

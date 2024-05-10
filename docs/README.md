@@ -3,11 +3,11 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and title
-repository-name: e18-4yp-Gamification-of-Orthodontic-Treatment-Success-with-Pre-and-Post-Dental-Models
-title: Gamification of Orthodontic Treatment Success with Pre and Post-Dental Models
+repository-name: e18-4yp-Automated-PAR-Index-Calculation-on-Orthodontic-Treatment-Using-Software-and-Machine-Learning-Tools
+title: Automated PAR Index Calculation on Orthodontic Treatment Using Software and Machine Learning Tools
 ---
 
-# Gamification of Orthodontic Treatment Success with Pre and Post-Dental Models
+# Automated PAR Index Calculation on Orthodontic Treatment Using Software and Machine Learning Tools
 
 #### Team
 
@@ -60,7 +60,7 @@ The software was developed in stages, starting with the ability to render STL fi
 An interface was created for users, primarily consisting of dental professionals and trainees, to interact with the STL files. As they marked the necessary points on the 3D models, these data points served as labelled data for training our deep neural network.
 
 **Machine Learning Implementation**
-A deep learning framework was chosen to develop a neural network capable of learning from the labeled dataset. The network was designed to:
+A deep learning framework was chosen to develop a neural network capable of learning from the labelled dataset. The network was designed to:
 
 1. Learn the patterns of point marking from the dataset.
 2. Automate the marking process on new STL files without human intervention.

@@ -1,4 +1,4 @@
-# Gamification of Orthodontic Treatment Success with Pre and Post-Dental Models
+# Automated PAR Index Calculation on Orthodontic Treatment Using Software and Machine Learning Tools
 
 #### Team
 
