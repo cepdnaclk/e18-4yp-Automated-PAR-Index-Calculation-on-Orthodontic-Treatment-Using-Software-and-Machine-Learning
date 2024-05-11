@@ -110,7 +110,6 @@ def save_data(self):
     try:
         url = 'http://localhost:8080/api/point/list'
         data = {
-            "stl_file" : self.files_data,
             "file_type" : self.fileType,
             "measurement_type": self.measurement,
             "points": [{"point_name": point["name"], "coordinates": f"{point['x']},{point['y']},{point['z']}"} for point in self.points]
@@ -124,3 +123,5 @@ def save_data(self):
             print(response.text, "\n", response)
     except Exception as e:
         QMessageBox.critical(self, "Error", "An error occurred: " + str(e))
+
+

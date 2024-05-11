@@ -1,8 +1,10 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QComboBox
+from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QComboBox, QLabel
 from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 import vtk
 from button_functions import load_stl, save_to_json, undo_marker, reset_markers, save_data
+from register_patient import RegisterWindow
+
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -16,8 +18,11 @@ class MainWindow(QMainWindow):
         self.mainLayout.addLayout(self.buttonPanel)
         self.mainWidget.setStyleSheet("background-color: black;")
 
+        self.btn_register = QPushButton("Register Patient")
+
         self.btn_load = QPushButton("Load STL")
 
+        self.label = QLabel('Select the filetype:', self)
         self.fileTypeComboBox = QComboBox()
         self.fileTypeComboBox.addItems(
             ["Upper Anterior Segment", 
@@ -82,10 +87,11 @@ class MainWindow(QMainWindow):
         }
         """
 
-        for btn in [self.btn_load, self.fileTypeComboBox,self.measurementTypeComboBox, self.btn_save_json, self.btn_reset, self.btn_undo, self.btnSave]:
+        for btn in [self.btn_register,self.btn_load,self.fileTypeComboBox,self.measurementTypeComboBox, self.btn_save_json, self.btn_reset, self.btn_undo, self.btnSave]:
             btn.setStyleSheet(button_style)
             self.buttonPanel.addWidget(btn)
 
+        self.btn_register.clicked.connect(self.open_register_window)
         self.btn_load.clicked.connect(lambda: load_stl(self))
         self.btn_save_json.clicked.connect(lambda: save_to_json(self))
         self.btn_reset.clicked.connect(lambda: reset_markers(self))
@@ -106,8 +112,13 @@ class MainWindow(QMainWindow):
     
     def update_file_type(self, index):
         # This method is called whenever the selected index in the combo box changes.
-        self.fileType = self.measurementTypeComboBox1.currentText()
+        self.fileType = self.fileTypeComboBox.currentText()
         print("Selected File Type:", self.fileType)
+    
+    def open_register_window(self):
+        # This function will be called when btn_register is clicked
+        self.register_window = RegisterWindow()  # Create an instance of RegisterWindow
+        self.register_window.show()  # Show the RegisterWindow
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
