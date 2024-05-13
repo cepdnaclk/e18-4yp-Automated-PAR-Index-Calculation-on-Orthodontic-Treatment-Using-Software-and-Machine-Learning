@@ -14,13 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class STLFile {
-
+public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long stl_id;
+    private Long patient_id;
 
-    private String filename;
-    private String location;
-    private String fileType;
+    private String name;
+    private String treatment_status;
 }

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SLTtoPointRequest {
-    private Long STL_ID;
+public class PatientRegisterResponse {
+    private Long patient_id;
 }

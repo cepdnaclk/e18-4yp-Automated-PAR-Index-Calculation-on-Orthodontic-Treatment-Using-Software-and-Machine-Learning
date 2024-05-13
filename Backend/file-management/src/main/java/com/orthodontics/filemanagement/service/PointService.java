@@ -16,24 +16,32 @@ import java.util.List;
 public class PointService {
 
     private final PointRepository pointRepository;
+    private final STLFileService stlFileService;
 
     public void createPoint(PointRequest pointRequest) {
+        Long stl_id = stlFileService.getSTLFileId(pointRequest.getPatient_id());
         Point point = Point.builder()
-                .stl_id(pointRequest.getStl_id())
+                .stlFiles_id(stl_id)
+                .measurement_type(pointRequest.getMeasurement_type())
+                .file_type(pointRequest.getFile_type())
                 .point_name(pointRequest.getPoint_name())
                 .coordinates(pointRequest.getCoordinates())
                 .build();
 
         pointRepository.save(point);
-        log.info("Point created: {}", point);
     }
 
     public void createPoints(PointListRequest pointListRequest) {
-        Long stl_id = pointListRequest.getStl_id();
+        Long stl_id = stlFileService.getSTLFileId(pointListRequest.getPatient_id());
+        String file_type = pointListRequest.getFile_type();
+        String measurement_type = pointListRequest.getMeasurement_type();
+
         List<Point> points = pointListRequest.getPoints();
 
         for (Point point : points) {
-            point.setStl_id(stl_id);
+            point.setStlFiles_id(stl_id);
+            point.setFile_type(file_type);
+            point.setMeasurement_type(measurement_type);
             pointRepository.save(point);
         }
     }

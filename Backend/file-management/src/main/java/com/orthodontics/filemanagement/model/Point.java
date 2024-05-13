@@ -18,7 +18,9 @@ public class Point {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long point_ID;
 
-    private Long stl_id;
+    private Long stlFiles_id;
+    private String file_type;
+    private String measurement_type;
     private String point_name;
     private String coordinates;
 }
