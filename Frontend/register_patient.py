@@ -1,3 +1,5 @@
+import gzip
+import shutil
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QLineEdit, QLabel, QRadioButton,
@@ -116,6 +118,11 @@ class RegisterWindow(QMainWindow):
         self.main_layout.addWidget(self.save_button)
         self.main_widget.setLayout(self.main_layout)
         
+    def gzip_compress_file(self,original_file, compressed_file):
+        with open(original_file, 'rb') as f_in:
+            with gzip.open(compressed_file, 'wb') as f_out:
+                shutil.copyfileobj(f_in, f_out)
+                
     def register_patient(self):
         # Collect data
         patient_data = {
@@ -126,12 +133,20 @@ class RegisterWindow(QMainWindow):
         self.files_data = {}
         for label, widget in zip(['opposing_file', 'buccal_file', 'prep_file'],
                              [self.opposing_file_display, self.buccal_file_display, self.prep_file_display]):
-            if widget.file_path:
-                with open(widget.file_path, "rb") as file:
+            #if widget.file_path:
+                #with open(widget.file_path, "rb") as file:
                     # Encode the file content in base64
-                    self.files_data[label] = base64.b64encode(file.read()).decode('utf-8')
+                    #self.files_data[label] = base64.b64encode(file.read()).decode('utf-8')
+            
+            if widget.file_path:
+                compressed_path = widget.file_path + '.gz'
+                self.gzip_compress_file(widget.file_path, compressed_path)
+                self.files_data[label] = (compressed_path, open(compressed_path, 'rb'), 'application/gzip')
         
-        patient_data.update(self.files_data)
+        #patient_data.update(self.files_data)
+
+        print(patient_data)
+        print(self.files_data)
 
         if not all(patient_data.values()):
             QMessageBox.critical(self, "Error", "All fields must be filled.")
@@ -139,7 +154,13 @@ class RegisterWindow(QMainWindow):
             # Here you would typically send this data to your backend server for storage
             url = 'http://localhost:8080/api/patient/register'
             try:
-                response = requests.post(url, data=patient_data)
+                #response = requests.post(url, data=patient_data)
+
+                response = requests.post(url, data=patient_data, files=self.files_data)
+
+                for file_label, file_tuple in self.files_data.items():
+                    file_tuple[1].close()
+
                 if response.status_code == 200:
                     QMessageBox.information(self, "Success", "Data submitted successfully.")
                 else:
