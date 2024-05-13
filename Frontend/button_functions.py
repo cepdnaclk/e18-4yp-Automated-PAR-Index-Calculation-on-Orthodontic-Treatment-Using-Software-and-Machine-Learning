@@ -108,7 +108,7 @@ def reset_markers(self):
 
 def save_data(self):
     try:
-        url = 'http://localhost:8080/api/point/list'
+        url = 'http://3.6.62.207:8080/api/point/list'
         data = {
             "file_type" : self.fileType,
             "measurement_type": self.measurement,

@@ -2,7 +2,6 @@ package com.orthodontics.filemanagement.controller;
 
 import com.orthodontics.filemanagement.dto.PointListRequest;
 import com.orthodontics.filemanagement.dto.PointRequest;
-import com.orthodontics.filemanagement.repository.PointRepository;
 import com.orthodontics.filemanagement.service.PointService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,6 @@ import java.util.List;
 public class PointController {
 
     private final PointService pointService;
-    private final PointRepository pointRepository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -35,5 +33,4 @@ public class PointController {
         System.out.println(stl_id);
         return null;
     }
-
 }

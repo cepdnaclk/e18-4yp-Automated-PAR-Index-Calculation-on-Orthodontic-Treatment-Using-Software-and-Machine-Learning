@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Data
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PatientRegisterRequest {
     private String name;
     private String treatment_status;
-    private String prep_file;
-    private String opposing_file;
-    private String buccal_file;
+    private MultipartFile prep_file;
+    private MultipartFile opposing_file;
+    private MultipartFile buccal_file;
 }
