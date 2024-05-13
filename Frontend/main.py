@@ -118,7 +118,11 @@ class MainWindow(QMainWindow):
     def open_register_window(self):
         # This function will be called when btn_register is clicked
         self.register_window = RegisterWindow()  # Create an instance of RegisterWindow
+        self.register_window.data_ready.connect(self.handle_data_from_register)  # Connect the data_ready signal to handle_data_from_register
         self.register_window.show()  # Show the RegisterWindow
+    
+    def handle_data_from_register(self, data):
+        print("Received data:", data)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
