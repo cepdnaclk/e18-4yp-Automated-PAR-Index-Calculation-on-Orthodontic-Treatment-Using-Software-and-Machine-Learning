@@ -1,3 +1,4 @@
+import base64
 import gzip
 import shutil
 import sys
@@ -185,17 +186,13 @@ class RegisterWindow(QMainWindow):
     
     def send_data(self):
         data = {}
-        temp_files = []
 
-        # Sample data generation, replace with your actual data handling
-        for label, widget in zip(['prep_file', 'opposing_file', 'buccal_file'],
-                                [self.prep_file_display, self.buccal_file_display, self.opposing_file_display]):
+        for label, widget in zip(['opposing_file', 'buccal_file', 'prep_file'],
+                             [self.opposing_file_display, self.buccal_file_display, self.prep_file_display]):
             if widget.file_path:
-                compressed_path = self.gzip_compress_file(widget.file_path)
-                print(compressed_path)
-                temp_files.append(compressed_path)  # Keep track for cleanup
-                file_key = label  # Key as used in the form data
-                data[file_key] = (os.path.basename(compressed_path), open(compressed_path, 'rb'), 'application/gzip')
+                with open(widget.file_path, "rb") as file:
+                    # Encode the file content in base64
+                    data[label] = base64.b64encode(file.read()).decode('utf-8')
 
         self.data_ready.emit(data)  # Emit the signal with the data
   
