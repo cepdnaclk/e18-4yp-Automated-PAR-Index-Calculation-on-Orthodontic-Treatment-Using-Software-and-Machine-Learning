@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QLineEdit, QLabel, QRadioButton,
                              QGroupBox,  QMessageBox, QMainWindow, QFileDialog)
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QPixmap, QIcon
 import requests
 import os
@@ -41,6 +41,9 @@ class FileDisplayWidget(QWidget):
             #self.titleLabel.setText(file_path)
 
 class RegisterWindow(QMainWindow):
+
+    data_ready = pyqtSignal(dict)
+
     def __init__(self):
         super().__init__()
         
@@ -111,6 +114,7 @@ class RegisterWindow(QMainWindow):
         self.save_button = QPushButton("Save")
         self.save_button.setStyleSheet(button_style)     
         self.save_button.clicked.connect(self.register_patient)
+        self.save_button.clicked.connect(self.send_data)
 
         self.main_layout.addLayout(self.patient_layout)
         self.main_layout.addWidget(self.treatment_type_group)
@@ -157,7 +161,8 @@ class RegisterWindow(QMainWindow):
                 files_data[file_key] = (os.path.basename(compressed_path), open(compressed_path, 'rb'), 'application/gzip')
 
         try:
-            url = 'http://3.6.62.207:8080/api/patient/register'  # Update with your actual URL
+            #url = 'http://3.6.62.207:8080/api/patient/register'  # Update with your actual URL
+            url = 'http://localhost:8000/api/patient/register'
             response = requests.post(url, data=patient_data, files=files_data)
 
             if response.status_code == 201:
@@ -177,4 +182,20 @@ class RegisterWindow(QMainWindow):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File")
         if file_path:
             display_widget.set_file(file_path)
+    
+    def send_data(self):
+        data = {}
+        temp_files = []
+
+        # Sample data generation, replace with your actual data handling
+        for label, widget in zip(['prep_file', 'opposing_file', 'buccal_file'],
+                                [self.prep_file_display, self.buccal_file_display, self.opposing_file_display]):
+            if widget.file_path:
+                compressed_path = self.gzip_compress_file(widget.file_path)
+                print(compressed_path)
+                temp_files.append(compressed_path)  # Keep track for cleanup
+                file_key = label  # Key as used in the form data
+                data[file_key] = (os.path.basename(compressed_path), open(compressed_path, 'rb'), 'application/gzip')
+
+        self.data_ready.emit(data)  # Emit the signal with the data
   
