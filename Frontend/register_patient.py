@@ -7,8 +7,8 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QIcon
 import requests
-import base64
 import os
+import tempfile
 
 class FileDisplayWidget(QWidget):
     def __init__(self):
@@ -118,58 +118,63 @@ class RegisterWindow(QMainWindow):
         self.main_layout.addWidget(self.save_button)
         self.main_widget.setLayout(self.main_layout)
         
-    def gzip_compress_file(self,original_file, compressed_file):
+    def gzip_compress_file(self, original_file):
+        # Compress the file and create a temporary file
+        compressed_file = original_file + '.tar.gz'
+        
+        # Compress the file using gzip.
         with open(original_file, 'rb') as f_in:
             with gzip.open(compressed_file, 'wb') as f_out:
                 shutil.copyfileobj(f_in, f_out)
-                
+        
+        return compressed_file
+    
+    def compress_file(original_file):
+        compressed_file = original_file + '.gz'
+        with open(original_file, 'rb') as f_in:
+            with gzip.open(compressed_file, 'wb') as f_out:
+                f_out.writelines(f_in)
+        return compressed_file
+
     def register_patient(self):
         # Collect data
         patient_data = {
-            'patient_name': self.patient_input.text(),
+            'name': self.patient_input.text(),
             'treatment_status': 'Pre' if self.pre_treatment_radio.isChecked() else 'Post',
         }
 
-        self.files_data = {}
-        for label, widget in zip(['opposing_file', 'buccal_file', 'prep_file'],
-                             [self.opposing_file_display, self.buccal_file_display, self.prep_file_display]):
-            #if widget.file_path:
-                #with open(widget.file_path, "rb") as file:
-                    # Encode the file content in base64
-                    #self.files_data[label] = base64.b64encode(file.read()).decode('utf-8')
-            
+        files_data = {}
+        temp_files = []  # To track temporary files for cleanup
+
+        # Compress and prepare files for upload
+        for label, widget in zip(['prep_file', 'opposing_file', 'buccal_file'],
+                                [self.prep_file_display, self.buccal_file_display, self.opposing_file_display]):
             if widget.file_path:
-                compressed_path = widget.file_path + '.gz'
-                self.gzip_compress_file(widget.file_path, compressed_path)
-                self.files_data[label] = (compressed_path, open(compressed_path, 'rb'), 'application/gzip')
-        
-        #patient_data.update(self.files_data)
+                compressed_path = self.gzip_compress_file(widget.file_path)
+                print(compressed_path)
+                temp_files.append(compressed_path)  # Keep track for cleanup
+                file_key = label  # Key as used in the form data
+                files_data[file_key] = (os.path.basename(compressed_path), open(compressed_path, 'rb'), 'application/gzip')
 
-        print(patient_data)
-        print(self.files_data)
+        try:
+            url = 'http://3.6.62.207:8080/api/patient/register'  # Update with your actual URL
+            response = requests.post(url, data=patient_data, files=files_data)
 
-        if not all(patient_data.values()):
-            QMessageBox.critical(self, "Error", "All fields must be filled.")
-        else:
-            # Here you would typically send this data to your backend server for storage
-            url = 'http://localhost:8080/api/patient/register'
-            try:
-                #response = requests.post(url, data=patient_data)
+            if response.status_code == 201:
+                QMessageBox.information(self, "Success", "Data submitted successfully.")
+            else:
+                QMessageBox.critical(self, "Error", "Failed to submit data. Server responded with error: {}".format(response.text))
+        except Exception as e:
+            QMessageBox.critical(self, "Error", "An error occurred: {}".format(str(e)))
+        finally:
+            # Clean up: Close files and remove temporary files
+            for _, file_tuple in files_data.items():
+                file_tuple[1].close()  # Close the file
+            for temp_file in temp_files:
+                os.remove(temp_file)  # Delete the temporary file
 
-                response = requests.post(url, data=patient_data, files=self.files_data)
-
-                for file_label, file_tuple in self.files_data.items():
-                    file_tuple[1].close()
-
-                if response.status_code == 200:
-                    QMessageBox.information(self, "Success", "Data submitted successfully.")
-                else:
-                    QMessageBox.critical(self, "Error", "Failed to submit data. Server responded with error.")
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"An error occurred: {str(e)}")
-    
-    def browse_file(self,button, display_widget):
+    def browse_file(self, button, display_widget):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File")
-        if file_path:  # if a file was selected
+        if file_path:
             display_widget.set_file(file_path)
-    
+  
