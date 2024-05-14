@@ -1,5 +1,6 @@
 import json
 import base64
+import tempfile
 import numpy as np
 import requests
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
@@ -9,17 +10,33 @@ from stl import mesh
 from commonHelper import RenderHelper  # Ensure this is properly imported
 
 def load_stl(self):
-    file_path = QFileDialog.getOpenFileName(self, "Select STL file", "", "STL Files (*.stl)")[0]
-    if file_path:
-        with open(file_path, "rb") as file:
-                # Encode the file content in base64
-                self.files_data = base64.b64encode(file.read()).decode('utf-8')
+    # file_path = QFileDialog.getOpenFileName(self, "Select STL file", "", "STL Files (*.stl)")[0]
+    # if file_path:
+    #     with open(file_path, "rb") as file:
+    #             # Encode the file content in base64
+    #             self.files_data = base64.b64encode(file.read()).decode('utf-8')
+    try:
+        if self.fileType == "Upper Anterior Segment":
+            base64_stl_data = self.file_data['prep_file']
+        elif self.fileType == "Lower Anterior Segment":
+            base64_stl_data = self.file_data['opposing_file']
+        elif self.fileType == "Buccal Segment":
+            base64_stl_data = self.file_data['buccal_file']
+    except Exception as e:
+        QMessageBox.warning(self, "Warning", "No file data to load. Register the patient!")
+        return
+
+    decoded_stl_data = base64.b64decode(base64_stl_data)
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".stl") as temp_file:
+        temp_file.write(decoded_stl_data)
+        temp_file_path = temp_file.name
 
         reader = vtk.vtkSTLReader()
-        reader.SetFileName(file_path)
+        reader.SetFileName(temp_file_path)
         reader.Update()
 
-        your_mesh = mesh.Mesh.from_file(file_path)
+        your_mesh = mesh.Mesh.from_file(temp_file_path)
 
         self.renderer.RemoveAllViewProps()
 

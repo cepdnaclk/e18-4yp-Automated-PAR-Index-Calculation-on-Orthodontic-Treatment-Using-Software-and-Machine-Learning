@@ -9,7 +9,6 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QPixmap, QIcon
 import requests
 import os
-import tempfile
 
 class FileDisplayWidget(QWidget):
     def __init__(self):
@@ -72,9 +71,9 @@ class RegisterWindow(QMainWindow):
         
         files_layout = QHBoxLayout()
         # File Upload Groups
-        opposing_group = QGroupBox('Opposing')
-        buccal_group = QGroupBox('Buccal')
-        prep_group = QGroupBox('Prep')
+        opposing_group = QGroupBox('Lower Anterior Segment')
+        buccal_group = QGroupBox('Buccal Segment')
+        prep_group = QGroupBox('Upper Anterior Segment')
 
         self.opposing_file_display = FileDisplayWidget()
         self.buccal_file_display = FileDisplayWidget()
