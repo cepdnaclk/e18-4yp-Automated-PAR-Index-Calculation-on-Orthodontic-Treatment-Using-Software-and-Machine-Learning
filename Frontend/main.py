@@ -4,7 +4,8 @@ from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 import vtk
 from button_functions import load_stl, save_to_json, undo_marker, reset_markers, save_data
 from register_patient import RegisterWindow
-
+from disclaimers import (UPPER_ANTERIOR_SEGMENT_ALIGNMENT, LOWER_ANTERIOR_SEGMENT_ALIGNMENT, OVERJET, OVERBITE, 
+                       OPEN_BITE, CENTRE_LINE_DISPLACEMENT)
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -111,9 +112,23 @@ class MainWindow(QMainWindow):
         self.points = []
 
     def update_measurement_type(self, index):
-        # This method is called whenever the selected index in the combo box changes.
         self.measurement = self.measurementTypeComboBox.currentText()
+        self.update_disclaimer_text(self.measurement)
         print("Selected Measurement Type:", self.measurement)
+
+    def update_disclaimer_text(self, new_text):
+        if hasattr(self, 'text_actor'):
+            disclaimer_text = {
+            "Upper Anterior Segment Alignment": UPPER_ANTERIOR_SEGMENT_ALIGNMENT,
+            "Lower Anterior Segment Alignment": LOWER_ANTERIOR_SEGMENT_ALIGNMENT,
+            "Overjet": OVERJET,
+            "Overbite": OVERBITE,
+            "Open Bite": OPEN_BITE,
+            "Centre Line Displacement": CENTRE_LINE_DISPLACEMENT
+            }.get(new_text, "No disclaimer available for this type.")
+
+            self.text_actor.SetInput(disclaimer_text)
+            self.vtkWidget.GetRenderWindow().Render()  # Rerender to update the display
     
     def update_file_type(self, index):
         # This method is called whenever the selected index in the combo box changes.
