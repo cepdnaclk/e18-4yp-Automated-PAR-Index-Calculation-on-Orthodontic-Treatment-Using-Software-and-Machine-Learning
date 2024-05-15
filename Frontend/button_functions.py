@@ -78,6 +78,15 @@ def load_stl(self):
             lineActor.GetProperty().SetLineWidth(2)
 
             self.renderer.AddActor(lineActor)
+        
+        # Initialize text actor here and store as a class attribute
+        self.text_actor = vtk.vtkTextActor()
+        self.text_actor.GetTextProperty().SetColor(0, 1, 0)  # Green color
+        self.text_actor.GetTextProperty().SetFontSize(20)
+        self.text_actor.SetPosition(20, 30)
+        self.renderer.AddActor(self.text_actor)
+
+        self.update_disclaimer_text(self.measurement)  # Initial text update
 
         self.interactor = self.vtkWidget.GetRenderWindow().GetInteractor()
         style = RenderHelper(self.renderer, self.center, self.vtkWidget.GetRenderWindow(), self.markers, self.points)
