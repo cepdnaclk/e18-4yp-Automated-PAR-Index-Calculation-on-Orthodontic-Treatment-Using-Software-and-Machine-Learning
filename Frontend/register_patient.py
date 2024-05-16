@@ -114,7 +114,6 @@ class RegisterWindow(QMainWindow):
         self.save_button = QPushButton("Save")
         self.save_button.setStyleSheet(button_style)     
         self.save_button.clicked.connect(self.register_patient)
-        self.save_button.clicked.connect(self.send_data)
 
         self.main_layout.addLayout(self.patient_layout)
         self.main_layout.addWidget(self.treatment_type_group)
@@ -124,7 +123,7 @@ class RegisterWindow(QMainWindow):
         
     def gzip_compress_file(self, original_file):
         # Compress the file and create a temporary file
-        compressed_file = original_file + '.tar.gz'
+        compressed_file = original_file + '.gz'
         
         # Compress the file using gzip.
         with open(original_file, 'rb') as f_in:
@@ -155,18 +154,33 @@ class RegisterWindow(QMainWindow):
                                 [self.prep_file_display, self.buccal_file_display, self.opposing_file_display]):
             if widget.file_path:
                 compressed_path = self.gzip_compress_file(widget.file_path)
-                print(compressed_path)
+                #print(compressed_path)
                 temp_files.append(compressed_path)  # Keep track for cleanup
                 file_key = label  # Key as used in the form data
                 files_data[file_key] = (os.path.basename(compressed_path), open(compressed_path, 'rb'), 'application/gzip')
 
         try:
-            #url = 'http://3.6.62.207:8080/api/patient/register'  # Update with your actual URL
-            url = 'http://localhost:8000/api/patient/register'
+            url = 'http://3.6.62.207:8080/api/patient/register'  # Update with your actual URL
             response = requests.post(url, data=patient_data, files=files_data)
+            patient_id = response.json().get('patient_id')
 
             if response.status_code == 201:
+                
+                data = {}
+
+                for label, widget in zip(['opposing_file', 'buccal_file', 'prep_file'],
+                             [self.opposing_file_display, self.buccal_file_display, self.prep_file_display]):
+                    if widget.file_path:
+                        with open(widget.file_path, "rb") as file:
+                            # Encode the file content in base64
+                            data[label] = base64.b64encode(file.read()).decode('utf-8')
+                
+                data[patient_id] = patient_id
+
+                self.data_ready.emit(data)
+
                 QMessageBox.information(self, "Success", "Data submitted successfully.")
+
             else:
                 QMessageBox.critical(self, "Error", "Failed to submit data. Server responded with error: {}".format(response.text))
         except Exception as e:
@@ -175,23 +189,11 @@ class RegisterWindow(QMainWindow):
             # Clean up: Close files and remove temporary files
             for _, file_tuple in files_data.items():
                 file_tuple[1].close()  # Close the file
-            for temp_file in temp_files:
-                os.remove(temp_file)  # Delete the temporary file
+            # for temp_file in temp_files:
+            #     os.remove(temp_file)  # Delete the temporary file
 
     def browse_file(self, button, display_widget):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File")
         if file_path:
             display_widget.set_file(file_path)
-    
-    def send_data(self):
-        data = {}
-
-        for label, widget in zip(['opposing_file', 'buccal_file', 'prep_file'],
-                             [self.opposing_file_display, self.buccal_file_display, self.prep_file_display]):
-            if widget.file_path:
-                with open(widget.file_path, "rb") as file:
-                    # Encode the file content in base64
-                    data[label] = base64.b64encode(file.read()).decode('utf-8')
-
-        self.data_ready.emit(data)  # Emit the signal with the data
   
