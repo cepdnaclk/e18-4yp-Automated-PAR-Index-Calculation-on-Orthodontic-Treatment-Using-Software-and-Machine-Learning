@@ -136,6 +136,7 @@ def save_data(self):
     try:
         url = 'http://3.6.62.207:8080/api/point/list'
         data = {
+            "patient_id" : self.file_data['patient_id'],
             "file_type" : self.fileType,
             "measurement_type": self.measurement,
             "points": [{"point_name": point["name"], "coordinates": f"{point['x']},{point['y']},{point['z']}"} for point in self.points]
