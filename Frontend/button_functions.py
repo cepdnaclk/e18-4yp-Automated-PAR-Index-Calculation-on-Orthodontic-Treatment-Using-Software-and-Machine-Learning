@@ -141,6 +141,8 @@ def save_data(self):
             "measurement_type": self.measurement,
             "points": [{"point_name": point["name"], "coordinates": f"{point['x']},{point['y']},{point['z']}"} for point in self.points]
         }
+
+        print(data["patient_id"])
     
         response = requests.post(url, json=data)
         if response.status_code == 201:

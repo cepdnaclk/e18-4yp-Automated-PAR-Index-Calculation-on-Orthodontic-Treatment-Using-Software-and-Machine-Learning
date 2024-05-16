@@ -175,7 +175,7 @@ class RegisterWindow(QMainWindow):
                             # Encode the file content in base64
                             data[label] = base64.b64encode(file.read()).decode('utf-8')
                 
-                data[patient_id] = patient_id
+                data['patient_id'] = patient_id
 
                 self.data_ready.emit(data)
 
