@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
         self.btnSave = QPushButton("Save")
 
         button_style = """
-        QPushButton, QComboBox {
+        QPushButton, QComboBox, QLabel {
             background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #2196F3, stop:1 #0D47A1);
             border: 2px solid #0D47A1;
             border-radius: 20px;
@@ -78,7 +78,6 @@ class MainWindow(QMainWindow):
         }
 
         QComboBox::drop-down {
-            background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #2196F3, stop:1 #0D47A1);
             subcontrol-origin: padding;
             subcontrol-position: top right;
             width: 15px;
@@ -88,16 +87,24 @@ class MainWindow(QMainWindow):
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
         }
+
+        QComboBox QAbstractItemView {
+            background-color: #ADD8E6; /* Light blue background */
+            color: black; /* Ensuring text is visible against light background */
+            selection-background-color: #5599FF; /* Different color for selection for better contrast */
+        }
         """
 
+        uniform_width = 25
         for btn in [self.btn_register,self.label_filetype,self.fileTypeComboBox,self.btn_load,self.label_measurementtype,self.measurementTypeComboBox, self.btn_save_json, self.btn_reset, self.btn_undo, self.btnSave]:
             if (btn == self.label_filetype or btn == self.label_measurementtype):
-                btn.setStyleSheet("color: white; font-size: 14px; margin: 5px;")
+                btn.setFixedHeight(uniform_width)
+                btn.setStyleSheet("color: white; font-size: 14px; margin: 5px; border: 2px;")
             else:
                 btn.setStyleSheet(button_style)
             self.buttonPanel.addWidget(btn)
 
-        self.buttonPanel.addSpacing(10)
+        self.buttonPanel.addSpacing(2)
         self.btn_register.clicked.connect(self.open_register_window)
         self.btn_load.clicked.connect(lambda: load_stl(self))
         self.btn_save_json.clicked.connect(lambda: save_to_json(self))

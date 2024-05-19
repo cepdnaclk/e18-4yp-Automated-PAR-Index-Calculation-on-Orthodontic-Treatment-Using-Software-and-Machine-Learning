@@ -29,6 +29,9 @@ def load_stl(self):
     decoded_stl_data = base64.b64decode(base64_stl_data)
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".stl") as temp_file:
+        self.markers.clear()  # Clear the list of markers
+        self.points.clear()  # Clear the list of points
+        
         temp_file.write(decoded_stl_data)
         temp_file_path = temp_file.name
 
@@ -147,6 +150,12 @@ def save_data(self):
         response = requests.post(url, json=data)
         if response.status_code == 201:
             QMessageBox.information(self, "Success", "The data was saved successfully!")
+
+            # Clear markers and points after successful data transmission
+            self.markers.clear()  # Clear the list of markers
+            self.points.clear()  # Clear the list of points
+            self.renderer.RemoveAllViewProps()  # Optionally remove all actors from the renderer
+            self.vtkWidget.GetRenderWindow().Render()  # Re-render the window to update the scene
         else:
             QMessageBox.warning(self, "Error", "Failed to save data.")
             print(response.text, "\n", response)
