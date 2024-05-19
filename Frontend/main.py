@@ -4,8 +4,8 @@ from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 import vtk
 from button_functions import load_stl, save_to_json, undo_marker, reset_markers, save_data
 from register_patient import RegisterWindow
-from disclaimers import (UPPER_ANTERIOR_SEGMENT_ALIGNMENT, LOWER_ANTERIOR_SEGMENT_ALIGNMENT, OVERJET, OVERBITE, 
-                       OPEN_BITE, CENTRE_LINE_DISPLACEMENT)
+from disclaimers import (UPPER_ANTERIOR_SEGMENT_ALIGNMENT, LOWER_ANTERIOR_SEGMENT_ALIGNMENT, OVERJET, REVERSE_OVERJET, OVERBITE, 
+                       OPENBITE, CENTRE_LINE_DISPLACEMENT)
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -40,6 +40,7 @@ class MainWindow(QMainWindow):
             ["Upper Anterior Segment Alignment", 
              "Lower Anterior Segment Alignment", 
              "Overjet",
+             "Reverse Overjet",
              "Overbite",
              "Open Bite",
              "Centre Line Displacement"])
@@ -122,8 +123,9 @@ class MainWindow(QMainWindow):
             "Upper Anterior Segment Alignment": UPPER_ANTERIOR_SEGMENT_ALIGNMENT,
             "Lower Anterior Segment Alignment": LOWER_ANTERIOR_SEGMENT_ALIGNMENT,
             "Overjet": OVERJET,
+            "Reverse Overjet": REVERSE_OVERJET, 
             "Overbite": OVERBITE,
-            "Open Bite": OPEN_BITE,
+            "Open Bite": OPENBITE,
             "Centre Line Displacement": CENTRE_LINE_DISPLACEMENT
             }.get(new_text, "No disclaimer available for this type.")
 
