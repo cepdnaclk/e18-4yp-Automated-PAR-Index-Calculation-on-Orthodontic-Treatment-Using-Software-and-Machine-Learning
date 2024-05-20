@@ -158,39 +158,46 @@ class RegisterWindow(QMainWindow):
                 temp_files.append(compressed_path)  # Keep track for cleanup
                 file_key = label  # Key as used in the form data
                 files_data[file_key] = (os.path.basename(compressed_path), open(compressed_path, 'rb'), 'application/gzip')
+        
+        required_keys = ['prep_file', 'opposing_file', 'buccal_file']
+        missing_keys = [key for key in required_keys if key not in files_data]
 
-        try:
-            url = 'http://3.6.62.207:8080/api/patient/register'  # Update with your actual URL
-            response = requests.post(url, data=patient_data, files=files_data)
-            patient_id = response.json().get('patient_id')
+        if missing_keys or not patient_data['name'] or not patient_data['treatment_status']:
+            QMessageBox.warning(self, "Error", "All fields must be filled.")
+                  
+        else:
+            try:
+                url = 'http://3.6.62.207:8080/api/patient/register'  # Update with your actual URL
+                response = requests.post(url, data=patient_data, files=files_data)
+                patient_id = response.json().get('patient_id')
 
-            if response.status_code == 201:
-                
-                data = {}
+                if response.status_code == 201:
+                    
+                    data = {}
 
-                for label, widget in zip(['opposing_file', 'buccal_file', 'prep_file'],
-                             [self.opposing_file_display, self.buccal_file_display, self.prep_file_display]):
-                    if widget.file_path:
-                        with open(widget.file_path, "rb") as file:
-                            # Encode the file content in base64
-                            data[label] = base64.b64encode(file.read()).decode('utf-8')
-                
-                data['patient_id'] = patient_id
+                    for label, widget in zip(['opposing_file', 'buccal_file', 'prep_file'],
+                                [self.opposing_file_display, self.buccal_file_display, self.prep_file_display]):
+                        if widget.file_path:
+                            with open(widget.file_path, "rb") as file:
+                                # Encode the file content in base64
+                                data[label] = base64.b64encode(file.read()).decode('utf-8')
+                    
+                    data['patient_id'] = patient_id
 
-                self.data_ready.emit(data)
+                    self.data_ready.emit(data)
 
-                QMessageBox.information(self, "Success", "Data submitted successfully.")
+                    QMessageBox.information(self, "Success", "Data submitted successfully.")
 
-            else:
-                QMessageBox.critical(self, "Error", "Failed to submit data. Server responded with error: {}".format(response.text))
-        except Exception as e:
-            QMessageBox.critical(self, "Error", "An error occurred: {}".format(str(e)))
-        finally:
-            # Clean up: Close files and remove temporary files
-            for _, file_tuple in files_data.items():
-                file_tuple[1].close()  # Close the file
-            # for temp_file in temp_files:
-            #     os.remove(temp_file)  # Delete the temporary file
+                else:
+                    QMessageBox.critical(self, "Error", "Failed to submit data. Server responded with error: {}".format(response.text))
+            except Exception as e:
+                QMessageBox.critical(self, "Error", "An error occurred: {}".format(str(e)))
+            finally:
+                # Clean up: Close files and remove temporary files
+                for _, file_tuple in files_data.items():
+                    file_tuple[1].close()  # Close the file
+                # for temp_file in temp_files:
+                #     os.remove(temp_file)  # Delete the temporary file
 
     def browse_file(self, button, display_widget):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File")
