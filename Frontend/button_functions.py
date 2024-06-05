@@ -89,7 +89,7 @@ def load_stl(self):
         self.text_actor.SetPosition(20, 30)
         self.renderer.AddActor(self.text_actor)
 
-        self.update_disclaimer_text(self.measurement)  # Initial text update
+        self.update_disclaimer_text(self.fileType)  # Initial text update
 
         self.interactor = self.vtkWidget.GetRenderWindow().GetInteractor()
         style = RenderHelper(self.renderer, self.center, self.vtkWidget.GetRenderWindow(), self.markers, self.points)
