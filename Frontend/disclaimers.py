@@ -1,4 +1,4 @@
-UPPER_ANTERIOR_SEGMENT_ALIGNMENT = """
+UPPER_ANTERIOR_SEGMENT = """
 Get the following points using Upper Anterior Segment
 Label them as follows:
     >> Left 3 - mesial (L3M)
@@ -11,9 +11,39 @@ Label them as follows:
     >> Right 2 - mesial (R2M)
     >> Right 2 - distal (R2D)
     >> Right 3 - mesial (R3M)
+    >> Left 3 - mid (L3Mid)
+    >> Left 2 - mid (L2Mid)
+    >> Left 1 - mid (L1Mid)
+    >> Right 1 - mid (R1Mid)
+    >> Right 2 - mid (R2Mid)
+    >> Right 3 - mid (R3Mid)
+    >> Right 4 - palatal tip (R4PT)
+    >> Left 4 - palatal tip (L4PT)
+    >> Right 5 - palatal tip (R5PT)
+    >> Left 5 - palatal tip (L5PT)
+    >> Right 6 - palatal mesial (R6PM)
+    >> Left 6 - palatal mesial (L6PM)
+    >> Right 6 - palatal distal (R6PD)
+    >> Left 6 - palatal distal (L6PD)
+    >> Right 7 - palatal mesial (R7PM)
+    >> Left 7 - palatal mesial (L7PM)
+    >> Right 7 - palatal distal (R7PD)
+    >> Left 7 - palatal distal (L7PD)
+    >> Right 4 - buccal tip (R4BT)
+    >> Left 4 - buccal tip (L4BT)
+    >> Right 5 - buccal tip (R5BT)
+    >> Left 5 - buccal tip (L5BT)
+    >> Right 6 - buccal mesial (R6BM)
+    >> Left 6 - buccal mesial (L6BM)
+    >> Right 6 - buccal distal (R6BD)
+    >> Left 6 - buccal distal (L6BD)
+    >> Right 7 - buccal mesial (R7BM)
+    >> Left 7 - buccal mesial (L7BM)
+    >> Right 7 - buccal distal (R7BD)
+    >> Left 7 - buccal distal (L7BD)
 """
 
-LOWER_ANTERIOR_SEGMENT_ALIGNMENT = '''
+LOWER_ANTERIOR_SEGMENT = '''
 Get the following points using Lower Anterior Segment
 Label them as follows:
     >> Left 3 - mesial (L3M)
@@ -26,37 +56,43 @@ Label them as follows:
     >> Right 2 - mesial (R2M)
     >> Right 2 - distal (R2D)
     >> Right 3 - mesial (R3M)
+    >> Left 3 - mid (L3Mid)
+    >> Left 2 - mid (L2Mid)
+    >> Left 1 - mid (L1Mid)
+    >> Right 1 - mid (R1Mid)
+    >> Right 2 - mid (R2Mid)
+    >> Right 3 - mid (R3Mid)
+    >> Lower point of Right 1 (R1Lower)
+    >> Right 4 - palatal tip (R4PT)
+    >> Left 4 - palatal tip (L4PT)
+    >> Right 5 - palatal tip (R5PT)
+    >> Left 5 - palatal tip (L5PT)
+    >> Right 6 - palatal mesial (R6PM)
+    >> Left 6 - palatal mesial (L6PM)
+    >> Right 6 - palatal distal (R6PD)
+    >> Left 6 - palatal distal (L6PD)
+    >> Right 7 - palatal mesial (R7PM)
+    >> Left 7 - palatal mesial (L7PM)
+    >> Right 7 - palatal distal (R7PD)
+    >> Left 7 - palatal distal (L7PD)
+    >> Right 4 - buccal tip (R4BT)
+    >> Left 4 - buccal tip (L4BT)
+    >> Right 5 - buccal tip (R5BT)
+    >> Left 5 - buccal tip (L5BT)
+    >> Right 6 - buccal mesial (R6BM)
+    >> Left 6 - buccal mesial (L6BM)
+    >> Right 6 - buccal distal (R6BD)
+    >> Left 6 - buccal distal (L6BD)
+    >> Right 7 - buccal mesial (R7BM)
+    >> Left 7 - buccal mesial (L7BM)
+    >> Right 7 - buccal distal (R7BD)
+    >> Left 7 - buccal distal (L7BD)
 '''
 
-OVERJET = '''
+BUCCAL_SEGMENT = '''
 Get the following points using Buccal Segment
 Label them as follows:
-    >> Contact point of the upper central incisors (OJ_UCP)
-    >> Contact point of the lower central incisors (OJ_LCP)
-'''
-
-REVERSE_OVERJET = '''
-Reverse overjet:
-    >> Visual Inspection
-'''
-
-OVERBITE = '''
-Overbite:
-    >> Visual Inspection
-'''
-
-OPENBITE = '''
-Get the following points using Buccal Segment
-Label them as follows:
-    >> Contact point of the upper central incisors (OB_UCP)
-    >> Contact point of the lower central incisors (OB_LCP)
-'''
-
-CENTRE_LINE_DISPLACEMENT = '''
-Get the following points using Buccal Segment
-Label them as follows:
-    >> Contact point of the upper central incisors (CL_UCP)
-    >> Contact point of the upper central incisors (CL_LCP)
-    >> Right 1 - mesial (CL_R1M)
-    >> Right 1 - distal (CL_R1D)
+    >> Contact point of the upper Right 1 (OJ_UCP)
+    >> Contact point of the lower Right 1 (OJ_LCP)
+    >> Covering point of the lower Right 1 (LCover)
 '''

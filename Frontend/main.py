@@ -4,8 +4,7 @@ from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 import vtk
 from button_functions import load_stl, save_to_json, undo_marker, reset_markers, save_data
 from register_patient import RegisterWindow
-from disclaimers import (UPPER_ANTERIOR_SEGMENT_ALIGNMENT, LOWER_ANTERIOR_SEGMENT_ALIGNMENT, OVERJET, REVERSE_OVERJET, OVERBITE, 
-                       OPENBITE, CENTRE_LINE_DISPLACEMENT)
+from disclaimers import (UPPER_ANTERIOR_SEGMENT, LOWER_ANTERIOR_SEGMENT, BUCCAL_SEGMENT)
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -34,19 +33,7 @@ class MainWindow(QMainWindow):
 
         self.fileTypeComboBox.currentIndexChanged.connect(self.update_file_type)
 
-        self.label_measurementtype = QLabel('Select the measurement type:')
-        self.measurementTypeComboBox = QComboBox()
-        self.measurementTypeComboBox.addItems(
-            ["Upper Anterior Segment Alignment", 
-             "Lower Anterior Segment Alignment", 
-             "Overjet",
-             "Reverse Overjet",
-             "Overbite",
-             "Open Bite",
-             "Centre Line Displacement"])
-        self.measurement = "Upper Anterior Segment Alignment"  # Default value
-
-        self.measurementTypeComboBox.currentIndexChanged.connect(self.update_measurement_type)
+        self.measurement = "undefined"
         
         self.btn_save_json = QPushButton("Save to JSON")
         self.btn_reset = QPushButton("Reset Markers")
@@ -96,8 +83,8 @@ class MainWindow(QMainWindow):
         """
 
         uniform_width = 25
-        for btn in [self.btn_register,self.label_filetype,self.fileTypeComboBox,self.btn_load,self.label_measurementtype,self.measurementTypeComboBox, self.btn_save_json, self.btn_reset, self.btn_undo, self.btnSave]:
-            if (btn == self.label_filetype or btn == self.label_measurementtype):
+        for btn in [self.btn_register,self.label_filetype,self.fileTypeComboBox,self.btn_load, self.btn_save_json, self.btn_reset, self.btn_undo, self.btnSave]:
+            if (btn == self.label_filetype):
                 btn.setFixedHeight(uniform_width)
                 btn.setStyleSheet("color: white; font-size: 14px; margin: 5px; border: 2px;")
             else:
@@ -119,21 +106,12 @@ class MainWindow(QMainWindow):
         self.markers = []
         self.points = []
 
-    def update_measurement_type(self, index):
-        self.measurement = self.measurementTypeComboBox.currentText()
-        self.update_disclaimer_text(self.measurement)
-        print("Selected Measurement Type:", self.measurement)
-
     def update_disclaimer_text(self, new_text):
         if hasattr(self, 'text_actor'):
             disclaimer_text = {
-            "Upper Anterior Segment Alignment": UPPER_ANTERIOR_SEGMENT_ALIGNMENT,
-            "Lower Anterior Segment Alignment": LOWER_ANTERIOR_SEGMENT_ALIGNMENT,
-            "Overjet": OVERJET,
-            "Reverse Overjet": REVERSE_OVERJET, 
-            "Overbite": OVERBITE,
-            "Open Bite": OPENBITE,
-            "Centre Line Displacement": CENTRE_LINE_DISPLACEMENT
+            "Upper Anterior Segment": UPPER_ANTERIOR_SEGMENT,
+            "Lower Anterior Segment": LOWER_ANTERIOR_SEGMENT,
+            "Buccal Segment": BUCCAL_SEGMENT,
             }.get(new_text, "No disclaimer available for this type.")
 
             self.text_actor.SetInput(disclaimer_text)
@@ -142,6 +120,7 @@ class MainWindow(QMainWindow):
     def update_file_type(self, index):
         # This method is called whenever the selected index in the combo box changes.
         self.fileType = self.fileTypeComboBox.currentText()
+        self.update_disclaimer_text(self.fileType)
         print("Selected File Type:", self.fileType)
     
     def open_register_window(self):

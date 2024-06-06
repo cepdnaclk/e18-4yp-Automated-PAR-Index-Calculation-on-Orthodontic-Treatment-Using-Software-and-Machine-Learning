@@ -6,6 +6,7 @@ import com.orthodontics.filemanagement.model.Point;
 import com.orthodontics.filemanagement.repository.PointRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,11 @@ import java.util.List;
 @Slf4j
 public class PointService {
 
-    private final PointRepository pointRepository;
-    private final STLFileService stlFileService;
+    @Autowired
+    private PointRepository pointRepository;
+
+    @Autowired
+    private STLFileService stlFileService;
 
     public void createPoint(PointRequest pointRequest) {
         Long stl_id = stlFileService.getSTLFileId(pointRequest.getPatient_id());

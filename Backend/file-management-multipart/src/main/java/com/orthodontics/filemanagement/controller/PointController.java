@@ -4,6 +4,7 @@ import com.orthodontics.filemanagement.dto.PointListRequest;
 import com.orthodontics.filemanagement.dto.PointRequest;
 import com.orthodontics.filemanagement.service.PointService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PointController {
 
-    private final PointService pointService;
+    @Autowired
+    private PointService pointService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
