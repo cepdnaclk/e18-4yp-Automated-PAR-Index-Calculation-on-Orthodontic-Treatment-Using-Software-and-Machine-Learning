@@ -71,9 +71,9 @@ class RegisterWindow(QMainWindow):
         
         files_layout = QHBoxLayout()
         # File Upload Groups
-        opposing_group = QGroupBox('Lower Anterior Segment')
+        opposing_group = QGroupBox('Lower Arch Segment')
         buccal_group = QGroupBox('Buccal Segment')
-        prep_group = QGroupBox('Upper Anterior Segment')
+        prep_group = QGroupBox('Upper Arch Segment')
 
         self.opposing_file_display = FileDisplayWidget()
         self.buccal_file_display = FileDisplayWidget()

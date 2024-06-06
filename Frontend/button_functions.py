@@ -16,9 +16,9 @@ def load_stl(self):
     #             # Encode the file content in base64
     #             self.files_data = base64.b64encode(file.read()).decode('utf-8')
     try:
-        if self.fileType == "Upper Anterior Segment":
+        if self.fileType == "Upper Arch Segment":
             base64_stl_data = self.file_data['prep_file']
-        elif self.fileType == "Lower Anterior Segment":
+        elif self.fileType == "Lower Arch Segment":
             base64_stl_data = self.file_data['opposing_file']
         elif self.fileType == "Buccal Segment":
             base64_stl_data = self.file_data['buccal_file']

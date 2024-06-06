@@ -25,11 +25,11 @@ class MainWindow(QMainWindow):
         self.label_filetype = QLabel('Select the file type:')
         self.fileTypeComboBox = QComboBox()
         self.fileTypeComboBox.addItems(
-            ["Upper Anterior Segment", 
-             "Lower Anterior Segment", 
+            ["Upper Arch Segment", 
+             "Lower Arch Segment", 
              "Buccal Segment"
             ])
-        self.fileType = "Upper Anterior Segment"  # Default value
+        self.fileType = "Upper Arch Segment"  # Default value
 
         self.fileTypeComboBox.currentIndexChanged.connect(self.update_file_type)
 
@@ -109,12 +109,13 @@ class MainWindow(QMainWindow):
     def update_disclaimer_text(self, new_text):
         if hasattr(self, 'text_actor'):
             disclaimer_text = {
-            "Upper Anterior Segment": UPPER_ANTERIOR_SEGMENT,
-            "Lower Anterior Segment": LOWER_ANTERIOR_SEGMENT,
+            "Upper Arch Segment": UPPER_ANTERIOR_SEGMENT,
+            "Lower Arch Segment": LOWER_ANTERIOR_SEGMENT,
             "Buccal Segment": BUCCAL_SEGMENT,
             }.get(new_text, "No disclaimer available for this type.")
 
             self.text_actor.SetInput(disclaimer_text)
+            self.text_actor.GetTextProperty().SetFontSize(15) 
             self.vtkWidget.GetRenderWindow().Render()  # Rerender to update the display
     
     def update_file_type(self, index):
