@@ -1,5 +1,5 @@
 UPPER_ANTERIOR_SEGMENT = """
-Get the following points using Upper Anterior Segment
+Get the following points using Upper Arch Segment
 Label them as follows:
     >> Left 3 - mesial (L3M)
     >> Left 2 - mesial (L2M)
@@ -44,7 +44,7 @@ Label them as follows:
 """
 
 LOWER_ANTERIOR_SEGMENT = '''
-Get the following points using Lower Anterior Segment
+Get the following points using Lower Arch Segment
 Label them as follows:
     >> Left 3 - mesial (L3M)
     >> Left 2 - mesial (L2M)
