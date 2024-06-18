@@ -30,7 +30,7 @@ class RenderHelper(vtk.vtkInteractorStyleTrackballCamera):
         # Create and place a sphere (marker)
         sphereSource = vtk.vtkSphereSource()
         sphereSource.SetCenter(position)
-        sphereSource.SetRadius(0.4)
+        sphereSource.SetRadius(0.1)
         sphereSource.Update()
 
         mapper = vtk.vtkPolyDataMapper()
