@@ -151,7 +151,7 @@ class RegisterWindow(QMainWindow):
 
         # Compress and prepare files for upload
         for label, widget in zip(['prep_file', 'opposing_file', 'buccal_file'],
-                                [self.prep_file_display, self.buccal_file_display, self.opposing_file_display]):
+                                [self.prep_file_display, self.opposing_file_display, self.buccal_file_display]):
             if widget.file_path:
                 compressed_path = self.gzip_compress_file(widget.file_path)
                 #print(compressed_path)
