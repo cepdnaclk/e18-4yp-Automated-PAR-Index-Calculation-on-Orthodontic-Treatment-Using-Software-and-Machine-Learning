@@ -4,14 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PointRequest {
-    private Long patient_id;
+public class STLResponse {
     private String file_type;
-    private String point_name;
-    private String coordinates;
+    private Resource stl_file;
+    private List<PointResponse> points;
 }

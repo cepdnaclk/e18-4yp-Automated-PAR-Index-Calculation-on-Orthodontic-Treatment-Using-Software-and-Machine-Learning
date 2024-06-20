@@ -6,6 +6,8 @@ import com.orthodontics.filemanagement.repository.STLFileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
@@ -58,5 +60,25 @@ public class STLFileService {
 
     public Long getSTLFileId(Long patient_id) {
         return STLFileRepository.findByPatient_id(patient_id).getStl_id();
+    }
+
+    public Resource getSTLFile(Long patient_id, String file_Type) {
+        Long stl_id = getSTLFileId(patient_id);
+        STLFiles stlFiles = STLFileRepository.findByPatient_id(stl_id);
+
+        String filePath = switch (file_Type) {
+            case "Lower" -> stlFiles.getPrep();
+            case "buccal" -> stlFiles.getBuccal();
+            case "Upper" -> stlFiles.getOpposing();
+            default -> null;
+        };
+
+        if (filePath != null) {
+            File file = new File(filePath);
+            System.out.println(filePath);
+            return new FileSystemResource(file);
+        }
+
+        return null;
     }
 }

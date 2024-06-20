@@ -2,7 +2,7 @@ package com.orthodontics.filemanagement.controller;
 
 import com.orthodontics.filemanagement.dto.PatientRegisterRequest;
 import com.orthodontics.filemanagement.dto.PatientRegisterResponse;
-import com.orthodontics.filemanagement.dto.PointResponse;
+import com.orthodontics.filemanagement.dto.PatientsResponse;
 import com.orthodontics.filemanagement.service.PatientService;
 import com.orthodontics.filemanagement.service.STLFileService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/patient")
@@ -31,5 +32,11 @@ public class PatientController {
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/patients")
+    public ResponseEntity<List<PatientsResponse>> getAllPatients() {
+        List<PatientsResponse> patients = patientService.getAllPatients();
+        return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 }
