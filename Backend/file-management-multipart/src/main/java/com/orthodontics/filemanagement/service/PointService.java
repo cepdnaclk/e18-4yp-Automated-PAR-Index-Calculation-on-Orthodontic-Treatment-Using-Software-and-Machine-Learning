@@ -2,6 +2,7 @@ package com.orthodontics.filemanagement.service;
 
 import com.orthodontics.filemanagement.dto.PointListRequest;
 import com.orthodontics.filemanagement.dto.PointRequest;
+import com.orthodontics.filemanagement.dto.PointResponse;
 import com.orthodontics.filemanagement.model.Point;
 import com.orthodontics.filemanagement.repository.PointRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,6 @@ public class PointService {
         Long stl_id = stlFileService.getSTLFileId(pointRequest.getPatient_id());
         Point point = Point.builder()
                 .stlFiles_id(stl_id)
-                .measurement_type(pointRequest.getMeasurement_type())
                 .file_type(pointRequest.getFile_type())
                 .point_name(pointRequest.getPoint_name())
                 .coordinates(pointRequest.getCoordinates())
@@ -45,8 +45,22 @@ public class PointService {
         for (Point point : points) {
             point.setStlFiles_id(stl_id);
             point.setFile_type(file_type);
-            point.setMeasurement_type(measurement_type);
             pointRepository.save(point);
         }
+    }
+
+    public List<PointResponse> getPoints(Long patient_id, String file_type) {
+        Long stl_id = stlFileService.getSTLFileId(patient_id);
+        List<Point> allPoints = pointRepository.findAllPointsForFile(stl_id, file_type);
+        List<PointResponse> points = new java.util.ArrayList<>(List.of());
+
+        for (Point point : allPoints) {
+            PointResponse finalPoint = PointResponse.builder()
+                    .point_name(point.getPoint_name())
+                    .coordinates(point.getCoordinates())
+                    .build();
+            points.add(finalPoint);
+        }
+        return points;
     }
 }

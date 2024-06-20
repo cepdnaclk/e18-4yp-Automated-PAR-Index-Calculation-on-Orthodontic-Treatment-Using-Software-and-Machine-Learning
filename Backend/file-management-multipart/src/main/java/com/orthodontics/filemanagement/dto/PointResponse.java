@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PointResponse {
     private Long point_ID;
-    private Long stl_id;
     private String point_name;
     private String coordinates;
 }

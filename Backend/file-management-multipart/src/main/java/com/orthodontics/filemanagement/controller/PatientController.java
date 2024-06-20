@@ -3,7 +3,6 @@ package com.orthodontics.filemanagement.controller;
 import com.orthodontics.filemanagement.dto.PatientRegisterRequest;
 import com.orthodontics.filemanagement.dto.PatientRegisterResponse;
 import com.orthodontics.filemanagement.dto.PatientsResponse;
-import com.orthodontics.filemanagement.dto.PointResponse;
 import com.orthodontics.filemanagement.service.PatientService;
 import com.orthodontics.filemanagement.service.STLFileService;
 import lombok.RequiredArgsConstructor;

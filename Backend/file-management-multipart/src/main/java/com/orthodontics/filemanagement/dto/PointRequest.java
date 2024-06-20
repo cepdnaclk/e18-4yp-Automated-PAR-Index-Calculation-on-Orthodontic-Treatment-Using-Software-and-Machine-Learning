@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class PointRequest {
     private Long patient_id;
     private String file_type;
-    private String measurement_type;
     private String point_name;
     private String coordinates;
 }
