@@ -31,18 +31,23 @@ public class STLFileService {
 
         STLFileRepository.save(stlFiles);
         Long stl_id = stlFiles.getStl_id();
+        if (patientRegisterRequest.getPrep_file() != null) {
+            String prepFileName = stl_id + "_prep_" + patientRegisterRequest.getPrep_file().getOriginalFilename();
+            String prepFilePath = storeFile(patientRegisterRequest.getPrep_file(), prepFileName);
+            stlFiles.setPrep(prepFilePath);
+        }
 
-        String prepFileName = stl_id + "_prep_" + patientRegisterRequest.getPrep_file().getOriginalFilename();
-        String buccalFileName = stl_id + "_buccal_" + patientRegisterRequest.getBuccal_file().getOriginalFilename();
-        String opposingFileName = stl_id + "_opposing_" + patientRegisterRequest.getOpposing_file().getOriginalFilename();
+        if (patientRegisterRequest.getBuccal_file() != null) {
+            String buccalFileName = stl_id + "_buccal_" + patientRegisterRequest.getBuccal_file().getOriginalFilename();
+            String buccalFilePath = storeFile(patientRegisterRequest.getBuccal_file(), buccalFileName);
+            stlFiles.setBuccal(buccalFilePath);
+        }
 
-        String prepFilePath = storeFile(patientRegisterRequest.getPrep_file(), prepFileName);
-        String buccalFilePath = storeFile(patientRegisterRequest.getBuccal_file(), buccalFileName);
-        String opposingFilePath = storeFile(patientRegisterRequest.getOpposing_file(), opposingFileName);
-
-        stlFiles.setPrep(prepFilePath);
-        stlFiles.setOpposing(opposingFilePath);
-        stlFiles.setBuccal(buccalFilePath);
+        if (patientRegisterRequest.getOpposing_file() != null) {
+            String opposingFileName = stl_id + "_opposing_" + patientRegisterRequest.getOpposing_file().getOriginalFilename();
+            String opposingFilePath = storeFile(patientRegisterRequest.getOpposing_file(), opposingFileName);
+            stlFiles.setOpposing(opposingFilePath);
+        }
 
         STLFileRepository.save(stlFiles);
 
