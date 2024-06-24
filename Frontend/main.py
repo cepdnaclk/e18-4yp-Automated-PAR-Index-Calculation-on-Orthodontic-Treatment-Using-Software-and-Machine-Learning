@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QComboBox, QLabel
-from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 import vtk
+from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 from button_functions import load_stl, save_to_json, undo_marker, reset_markers, save_data
 from register_patient import RegisterWindow
 from disclaimers import (UPPER_ANTERIOR_SEGMENT, LOWER_ANTERIOR_SEGMENT, BUCCAL_SEGMENT)

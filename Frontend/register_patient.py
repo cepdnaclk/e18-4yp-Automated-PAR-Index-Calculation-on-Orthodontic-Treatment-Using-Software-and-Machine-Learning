@@ -159,10 +159,11 @@ class RegisterWindow(QMainWindow):
                 file_key = label  # Key as used in the form data
                 files_data[file_key] = (os.path.basename(compressed_path), open(compressed_path, 'rb'), 'application/gzip')
         
-        required_keys = ['prep_file', 'opposing_file', 'buccal_file']
-        missing_keys = [key for key in required_keys if key not in files_data]
+        #required_keys = ['prep_file', 'opposing_file', 'buccal_file']
+        #missing_keys = [key for key in required_keys if key not in files_data]
 
-        if missing_keys or not patient_data['name'] or not patient_data['treatment_status']:
+        #if missing_keys or not patient_data['name'] or not patient_data['treatment_status']:
+        if not patient_data['name'] or not patient_data['treatment_status']:
             QMessageBox.warning(self, "Error", "All fields must be filled.")
                   
         else:
