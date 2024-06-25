@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @NoArgsConstructor
 @Builder
 @Data
+@Getter
 public class Point {
 
     @Id
@@ -22,4 +23,8 @@ public class Point {
     private String file_type;
     private String point_name;
     private String coordinates;
+
+    public String getName() {
+        return point_name;
+    }
 }
