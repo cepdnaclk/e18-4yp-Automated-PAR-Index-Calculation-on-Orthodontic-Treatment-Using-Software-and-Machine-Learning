@@ -1,10 +1,7 @@
 package com.orthodontics.filemanagement.dto;
 
 import com.orthodontics.filemanagement.model.Point;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 

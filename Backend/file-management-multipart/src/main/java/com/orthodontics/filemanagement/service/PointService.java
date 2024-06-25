@@ -3,14 +3,21 @@ package com.orthodontics.filemanagement.service;
 import com.orthodontics.filemanagement.dto.PointListRequest;
 import com.orthodontics.filemanagement.dto.PointRequest;
 import com.orthodontics.filemanagement.dto.PointResponse;
+import com.orthodontics.filemanagement.dto.PointsCSVResponse;
+import com.orthodontics.filemanagement.model.Patient;
 import com.orthodontics.filemanagement.model.Point;
+import com.orthodontics.filemanagement.model.STLFiles;
+import com.orthodontics.filemanagement.repository.PatientRepository;
 import com.orthodontics.filemanagement.repository.PointRepository;
+import com.orthodontics.filemanagement.repository.STLFileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +29,12 @@ public class PointService {
 
     @Autowired
     private STLFileService stlFileService;
+
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private STLFileRepository stlFileRepository;
 
     public void createPoint(PointRequest pointRequest) {
         Long stl_id = stlFileService.getSTLFileId(pointRequest.getPatient_id());
@@ -62,5 +75,27 @@ public class PointService {
             points.add(finalPoint);
         }
         return points;
+    }
+
+    public List<PointsCSVResponse> getAllFilePoints(String fileType) {
+        List<Patient> patients = patientRepository.findAll();
+        List<PointsCSVResponse> pointsCSVResponses = new ArrayList<>();
+
+        for (Patient patient : patients) {
+            Long stlId = stlFileRepository.findByPatient_id(patient.getPatient_id()).getStl_id();
+            if (stlId == null) {
+                continue;
+            }
+
+            List<Point> points = pointRepository.findAllPointsForFile(stlId, fileType);
+
+            List<String> pointNames = points.stream().map(Point::getName).collect(Collectors.toList());
+            List<String> pointCoordinates = points.stream()
+                    .map(p -> String.format("%s", p.getCoordinates()))
+                    .collect(Collectors.toList());
+
+            pointsCSVResponses.add(new PointsCSVResponse(patient.getName(), pointNames, pointCoordinates));
+        }
+        return pointsCSVResponses;
     }
 }
