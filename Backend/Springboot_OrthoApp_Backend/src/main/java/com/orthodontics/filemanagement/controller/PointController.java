@@ -1,5 +1,6 @@
 package com.orthodontics.filemanagement.controller;
 
+import com.orthodontics.filemanagement.dto.PARIndexPointsRequest;
 import com.orthodontics.filemanagement.dto.PointListRequest;
 import com.orthodontics.filemanagement.dto.PointRequest;
 import com.orthodontics.filemanagement.dto.PointsCSVResponse;
@@ -44,9 +45,8 @@ public class PointController {
     }
 
     @GetMapping
-    public List<PointRequest> getPoints(@RequestParam(name = "stl_id") long stl_id) {
-        System.out.println(stl_id);
-        return null;
+    public Map<String, List<PARIndexPointsRequest>> getPoints(@RequestParam(name = "patient_id") long patientID) {
+        return pointService.getPointsByFileType(patientID);
     }
 
     @GetMapping("/csv")

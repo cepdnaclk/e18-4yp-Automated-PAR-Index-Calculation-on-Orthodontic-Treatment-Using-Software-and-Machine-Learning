@@ -1,9 +1,6 @@
 package com.orthodontics.filemanagement.service;
 
-import com.orthodontics.filemanagement.dto.PointListRequest;
-import com.orthodontics.filemanagement.dto.PointRequest;
-import com.orthodontics.filemanagement.dto.PointResponse;
-import com.orthodontics.filemanagement.dto.PointsCSVResponse;
+import com.orthodontics.filemanagement.dto.*;
 import com.orthodontics.filemanagement.model.Patient;
 import com.orthodontics.filemanagement.model.Point;
 import com.orthodontics.filemanagement.model.STLFiles;
@@ -16,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -97,5 +96,29 @@ public class PointService {
             pointsCSVResponses.add(new PointsCSVResponse(patient.getName(), pointNames, pointCoordinates));
         }
         return pointsCSVResponses;
+    }
+
+    public Map<String, List<PARIndexPointsRequest>> getPointsByFileType(long patientID) {
+        Long stlId = stlFileService.getSTLFileId(patientID);
+        List<Point> points = pointRepository.findAllByStlFiles_id(stlId);
+
+        Map<String, List<PARIndexPointsRequest>> pointsByFileType = new HashMap<>();
+
+        pointsByFileType.put("Upper Arch Segment", points.stream()
+                .filter(point -> "Upper Arch Segment".equals(point.getFile_type()))
+                .map(point -> new PARIndexPointsRequest(point.getName(), point.getCoordinates()))
+                .collect(Collectors.toList()));
+
+        pointsByFileType.put("Lower Arch Segment", points.stream()
+                .filter(point -> "Lower Arch Segment".equals(point.getFile_type()))
+                .map(point -> new PARIndexPointsRequest(point.getName(), point.getCoordinates()))
+                .collect(Collectors.toList()));
+
+        pointsByFileType.put("Buccal Segment", points.stream()
+                .filter(point -> "Buccal Segment".equals(point.getFile_type()))
+                .map(point -> new PARIndexPointsRequest(point.getName(), point.getCoordinates()))
+                .collect(Collectors.toList()));
+
+        return pointsByFileType;
     }
 }

@@ -1,0 +1,70 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+
+# Ignore the venv directory if you have created a virtual environment
+venv/
+env/
+
+# If you're using pipenv
+Pipfile.lock
+
+# If you're using virtualenv
+# .env should not be committed if it contains sensitive data like database credentials
+.env
+
+# macOS specific
+.DS_Store
+
+# IDE specific
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# VSCode settings
+.vscode/
+
+# Node modules if you're using npm or yarn
+node_modules/
+
+# Static files (Django collectstatic)
+staticfiles/
+
+# Local development settings
+settings_local.py
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+*.cover
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest
+.pytest_cache/
+
+# Others
+*.swp
+*~
