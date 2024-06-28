@@ -1,20 +1,27 @@
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-import numpy as np
+from .PARIndexHub import *
+from .PARCalculator import *
 
-@csrf_exempt  # Disables CSRF validation for this view
+@csrf_exempt
 def process_coordinates(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        segments = data.get("segments", {})
+        try:
+            # PAR index variables
+            int_LowerAnteriorSegment = 0
 
-        for segment_name, points in segments.items():
-            for point in points:
-                coordinates = np.array(point["coordinates"].split(','), dtype=float)
-                # Perform your arithmetic operations
-                new_coordinates = coordinates + np.array([10, 2, -5])  # Example operation
-                point["coordinates"] = ','.join(map(str, new_coordinates))
+            # Load the JSON data
+            data = json.loads(request.body)
+
+            int_UpperAnteriorSegment = UpperLowerAnteriorSegments(data["Upper Arch Segment"])
+            int_LowerAnteriorSegment = UpperLowerAnteriorSegments(data["Lower Arch Segment"])
+
+            float_PAR_Index = PARCalculator(int_UpperAnteriorSegment, int_LowerAnteriorSegment)
+            
+            # return HttpResponse(f"{int_UpperAnteriorSegment}, {int_LowerAnteriorSegment}", status=200)
+            return HttpResponse(float_PAR_Index, status=200)
         
-        return JsonResponse(segments)
-    return JsonResponse({"error": "Invalid request method"}, status=400)
+        except json.JSONDecodeError as e:
+            return HttpResponse(f"Invalid JSON: {e}", status=400)
+    return HttpResponse("Invalid request method", status=400)
