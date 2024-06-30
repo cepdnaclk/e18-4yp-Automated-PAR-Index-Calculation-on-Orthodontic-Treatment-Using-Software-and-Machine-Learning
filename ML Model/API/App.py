@@ -13,9 +13,12 @@ names_lower = ['L1D', 'L1M', 'L1Mid', 'L2D', 'L2M', 'L2Mid', 'L3M', 'L3Mid', 'L4
          'R1D', 'R1Lower', 'R1M', 'R1Mid', 'R2D', 'R2M', 'R2Mid', 'R3M', 'R3Mid', 'R4BT',
          'R4PT', 'R5BT', 'R5PT', 'R6BD', 'R6BM', 'R6PD', 'R6PM', 'R7BD', 'R7BM', 'R7PD', 'R7PM']
 
-names_upper = []
+names_upper = ['L1D', 'L1M', 'L1Mid', 'L2D', 'L2M', 'L2Mid', 'L3M', 'L3Mid', 'L4BT', 'L4PT', 
+               'L5BT', 'L5PT', 'L6BD', 'L6BM', 'L6PD', 'L6PM', 'L7BD', 'L7BM', 'L7PD', 'L7PM', 
+               'R1D', 'R1M', 'R1Mid', 'R2D', 'R2M', 'R2Mid', 'R3M', 'R3Mid', 'R4BT', 'R4PT', 
+               'R5BT', 'R5PT', 'R6BD', 'R6BM', 'R6PD', 'R6PM', 'R7BD', 'R7BM', 'R7PD', 'R7PM']
 
-names_buccal = []
+names_buccal = ['LCover', 'OJ_LCP', 'OJ_UCP']
 
 @app.route("/predict/lower" , methods = ["POST"])
 def predict_lower():
@@ -48,7 +51,7 @@ def predict_lower():
 
 ## NOT COMPLETE
 @app.route("/predict/upper" , methods = ["POST"])
-def predict_lower():
+def predict_upper():
     # Load the trained model
     model = tf.keras.models.load_model('upper_landmark_prediction_model.h5')
     
@@ -78,7 +81,7 @@ def predict_lower():
 
 ## NOT COMPLETE
 @app.route("/predict/buccal" , methods = ["POST"])
-def predict_lower():
+def predict_buccal():
     # Load the trained model
     model = tf.keras.models.load_model('buccal_landmark_prediction_model.h5')
     
