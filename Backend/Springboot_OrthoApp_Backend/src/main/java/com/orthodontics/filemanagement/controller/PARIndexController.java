@@ -1,5 +1,8 @@
 package com.orthodontics.filemanagement.controller;
 
+import com.orthodontics.filemanagement.dto.PARIndexIntermediateData;
+import com.orthodontics.filemanagement.dto.PARIndexWebRequest;
+import com.orthodontics.filemanagement.dto.PatientRegisterRequest;
 import com.orthodontics.filemanagement.service.PARIndexService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +25,12 @@ public class PARIndexController {
         return parIndexService.processCoordinates(segments);
     }
 
+    @PostMapping(value = "/predict", consumes = {"multipart/form-data"})
+    @ResponseStatus(HttpStatus.OK)
+    public String predictParIndex(@ModelAttribute PARIndexWebRequest parIndexWebRequest) {
+        PARIndexIntermediateData parIndexIntermediateData = new PARIndexIntermediateData();
+        parIndexService.getPredictedPoints(parIndexWebRequest, parIndexIntermediateData);
+
+        return parIndexService.processPredictedPoints(parIndexIntermediateData);
+    }
 }
