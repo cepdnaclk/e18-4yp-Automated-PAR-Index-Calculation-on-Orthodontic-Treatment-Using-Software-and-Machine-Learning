@@ -1,0 +1,69 @@
+/* src/App.css */
+body.light-theme {
+    --body-bg-color: #ffffff;
+    --text-color: #000000;
+  }
+  
+  body.dark-theme {
+    --body-bg-color: #333333;
+    --text-color: #ffffff;
+  }
+  
+  body {
+    background-color: var(--body-bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .landing-page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-image: url('./assets/background.jpg'); /* Add your image path here */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .content-center {
+    z-index: 1;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%; /* Ensure the content center takes the full width */
+    padding: 10px; /* Optional: Add padding around the content */
+    border-radius: 40px; /* Optional: Add rounded corners to the content box */
+  }
+
+  button.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button.start {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #007BFF, #004FCC); /* Horizontal gradient */
+    color: #ffffff; /* Set text color to white for better visibility */
+    border: none; /* Optional: removes any default border */
+    padding: 20px 50px; /* Add padding for better button shape */
+    border-radius: 50px; /* Rounded corners */
+    transition: background 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+button.start:hover {
+    background-image: linear-gradient(to right, #006BEE, #003CAA); /* Slightly darker gradient for hover */
+}
+  
+  button.btn-primary svg {
+    margin-right: 5px;
+  }
+  
