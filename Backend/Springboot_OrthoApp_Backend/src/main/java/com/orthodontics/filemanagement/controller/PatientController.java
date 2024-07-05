@@ -21,6 +21,7 @@ public class PatientController {
     private final PatientService patientService;
     private final STLFileService STLFileService;
 
+    @CrossOrigin
     @PostMapping(value = "/register", consumes = {"multipart/form-data"})
     public ResponseEntity<PatientRegisterResponse> registerPatient(@ModelAttribute PatientRegisterRequest patientRegisterRequest) throws IOException {
         Long patient_id = patientService.createPatient(patientRegisterRequest);
@@ -34,6 +35,7 @@ public class PatientController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @CrossOrigin
     @GetMapping(value = "/patients")
     public ResponseEntity<List<PatientsResponse>> getAllPatients() {
         List<PatientsResponse> patients = patientService.getAllPatients();

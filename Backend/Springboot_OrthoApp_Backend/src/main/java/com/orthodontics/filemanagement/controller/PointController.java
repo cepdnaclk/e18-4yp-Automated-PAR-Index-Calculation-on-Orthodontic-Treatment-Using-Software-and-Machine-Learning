@@ -32,23 +32,27 @@ public class PointController {
     @Autowired
     private PointService pointService;
 
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createPoint(@RequestBody PointRequest pointRequest) {
         pointService.createPoint(pointRequest);
     }
 
+    @CrossOrigin
     @PostMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
     public void createPoints(@RequestBody PointListRequest pointListRequest) {
         pointService.createPoints(pointListRequest);
     }
 
+    @CrossOrigin
     @GetMapping
     public Map<String, List<PARIndexPointsRequest>> getPoints(@RequestParam(name = "patient_id") long patientID) {
         return pointService.getPointsByFileType(patientID);
     }
 
+    @CrossOrigin
     @GetMapping("/csv")
     public ResponseEntity<Resource> getFilePointsExcel(@RequestParam(name = "file_type") String fileType) throws IOException {
         List<PointsCSVResponse> pointsCSVResponses = pointService.getAllFilePoints(fileType);

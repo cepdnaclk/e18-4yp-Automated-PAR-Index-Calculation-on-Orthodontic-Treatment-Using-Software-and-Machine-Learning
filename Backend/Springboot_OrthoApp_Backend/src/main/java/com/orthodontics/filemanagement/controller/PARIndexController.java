@@ -19,12 +19,14 @@ public class PARIndexController {
     @Autowired
     private final PARIndexService parIndexService;
 
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public String processParIndex(@RequestBody Map<String, Object> segments) {
         return parIndexService.processCoordinates(segments);
     }
 
+    @CrossOrigin
     @PostMapping(value = "/predict", consumes = {"multipart/form-data"})
     @ResponseStatus(HttpStatus.OK)
     public String predictParIndex(@ModelAttribute PARIndexWebRequest parIndexWebRequest) {
