@@ -33,6 +33,9 @@ public class PARIndexController {
         PARIndexIntermediateData parIndexIntermediateData = new PARIndexIntermediateData();
         parIndexService.getPredictedPoints(parIndexWebRequest, parIndexIntermediateData);
 
-        return parIndexService.processPredictedPoints(parIndexIntermediateData);
+        String value = parIndexService.processPredictedPoints(parIndexIntermediateData);
+
+        System.out.println(value);
+        return value;
     }
 }

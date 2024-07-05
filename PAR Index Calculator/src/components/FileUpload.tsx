@@ -31,17 +31,17 @@ const FileUpload: React.FC = () => {
     }
 
     const formData = new FormData();
-    formData.append('patientName', patientName);
-    formData.append('buccal', buccalFile);
-    formData.append('lower', lowerFile);
-    formData.append('upper', upperFile);
+    formData.append('name', patientName);
+    formData.append('buccal_stl', buccalFile);
+    formData.append('lower_stl', lowerFile);
+    formData.append('upper_stl', upperFile);
 
     try {
       setLoading(true);
       const response = await axios.post('http://3.6.62.207:8080/api/parindex/predict', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      setParIndex(response.data.parIndex);
+      setParIndex(response.data);
     } catch (error) {
       console.error('Error uploading files:', error);
     } finally {
