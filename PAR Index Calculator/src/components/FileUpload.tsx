@@ -106,8 +106,8 @@ const FileUpload: React.FC = () => {
       )}
       
       {parIndex !== null && (
-        <div className="mt-3">
-          <h2>PAR Index: {parIndex}</h2>
+        <div className="parScore">
+          <h2>PAR Score is {parIndex}</h2>
         </div>
       )}
     </Container>
